@@ -1,12 +1,12 @@
-// import { Agenda, Jurnal, Program, Slogan, VisiMisi } from "./components";
+import { Slogan } from "./components";
 
 export default function Home() {
   return (
     <main>
       <div className="container">
         <div className="flex flex-wrap">
-          {/* <Slogan />
-          <VisiMisi />
+          <Slogan />
+          {/* <VisiMisi />
           <Program />
           <Jurnal />
           <Agenda /> */}
