@@ -21,17 +21,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body
-        className={`${spaceGrotesk.className} antialiased min-h-screen dark:bg-red-300`}
-      >
+    <html lang="en">
+      <body className={`${spaceGrotesk.className} antialiased min-h-screen`}>
         <NextUIProvider>
-          <MainNavbar />
-          <main>
-            <div className="container">
-              <div className="flex flex-wrap">{children}</div>
-            </div>
-          </main>
+          <NextThemesProvider attribute="class" defaultTheme="dark">
+            <main>
+              <MainNavbar />
+              <div className="container">
+                <div className="flex flex-wrap">{children}</div>
+              </div>
+            </main>
+          </NextThemesProvider>
         </NextUIProvider>
         {/* <Footer /> */}
       </body>

@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import FotoOsis from "/public/img/fotbar-osis.jpeg";
 import Icon from "/public/img/icon.png";
@@ -5,8 +7,13 @@ import { Spacer } from "@nextui-org/spacer";
 import { Button } from "@nextui-org/button";
 import { Chip } from "@nextui-org/chip";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 
 export default function Slogan() {
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+
   const visi = [
     "Solidaritas",
     "Integritas",
@@ -14,6 +21,12 @@ export default function Slogan() {
     "Akhlak",
     "Teknologi",
   ];
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     <div className="w-full flex flex-col min-h-screen">
@@ -54,8 +67,9 @@ export default function Slogan() {
             radius="lg"
             size="lg"
             className="tracking-wider font-medium"
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           >
-            DUKUNG
+            {theme}
           </Button>
         </Link>
       </div>
