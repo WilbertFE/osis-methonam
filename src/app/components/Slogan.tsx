@@ -6,9 +6,10 @@ import Icon from "/public/img/icon.png";
 import { Spacer } from "@nextui-org/spacer";
 import { Button } from "@nextui-org/button";
 import { Chip } from "@nextui-org/chip";
-import Link from "next/link";
+// import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 export default function Slogan() {
   const [mounted, setMounted] = useState(false);

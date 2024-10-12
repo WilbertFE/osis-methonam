@@ -24,11 +24,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${spaceGrotesk.className} antialiased min-h-screen`}>
         <NextUIProvider>
-          <NextThemesProvider attribute="class" defaultTheme="dark">
+          <NextThemesProvider
+            attribute="class"
+            defaultTheme="dark"
+            themes={["light", "dark"]}
+            enableSystem={false}
+          >
             <main>
               <MainNavbar />
               <div className="container">
-                <div className="flex flex-wrap">{children}</div>
+                <div className="flex flex-wrap justify-center">{children}</div>
               </div>
             </main>
           </NextThemesProvider>
