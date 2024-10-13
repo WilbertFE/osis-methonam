@@ -32,7 +32,7 @@ export default function MainNavbar() {
 
   return (
     <Navbar
-      className="bg-transparent"
+      className="dark:bg-transparent"
       isBordered
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
@@ -82,7 +82,7 @@ export default function MainNavbar() {
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarMenu>
+      <NavbarMenu className="dark:bg-transparent">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link className="w-full" color="foreground" href="#" size="lg">
