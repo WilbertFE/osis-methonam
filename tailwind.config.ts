@@ -1,31 +1,43 @@
 import type { Config } from "tailwindcss";
 import { nextui } from "@nextui-org/theme";
 
-const config: Config = {
+const config = {
+  darkMode: ["class"],
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@nextui-org/theme/dist/components/(avatar|button|chip|link|navbar|spacer|ripple|spinner).js",
   ],
-  darkMode: "class",
+  prefix: "",
   theme: {
     container: {
       center: true,
       padding: "1rem",
+      screens: {
+        "2xl": "1400px",
+      },
     },
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        ungu: "#6439FF",
-        biruTua: "#4F75FF",
-        biruMuda1: "#00CCDD",
-        biruMuda2: "#7CF5FF",
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-  plugins: [nextui()],
-};
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  plugins: [require("tailwindcss-animate"), nextui()],
+} satisfies Config;
+
 export default config;

@@ -30,7 +30,7 @@ export default function Slogan() {
   if (!mounted) return null;
 
   return (
-    <div className="w-full flex flex-col min-h-screen">
+    <>
       <Image
         src={FotoOsis}
         alt="osis methonam"
@@ -74,6 +74,6 @@ export default function Slogan() {
           </Button>
         </Link>
       </div>
-    </div>
+    </>
   );
 }

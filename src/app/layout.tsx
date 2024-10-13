@@ -33,12 +33,14 @@ export default function RootLayout({
             <main>
               <MainNavbar />
               <div className="container">
-                <div className="flex flex-wrap justify-center">{children}</div>
+                <div className="flex flex-wrap justify-center pb-32">
+                  {children}
+                </div>
               </div>
+              {/* <Footer /> */}
             </main>
           </NextThemesProvider>
         </NextUIProvider>
-        {/* <Footer /> */}
       </body>
     </html>
   );
