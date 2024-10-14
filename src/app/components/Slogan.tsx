@@ -10,6 +10,7 @@ import { Chip } from "@nextui-org/chip";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import { Highlight } from "@/components/ui/hero-highlight";
 
 export default function Slogan() {
   const [mounted, setMounted] = useState(false);
@@ -40,11 +41,13 @@ export default function Slogan() {
         className="opacity-80 rounded-b-xl"
       />
       <div className="z-10 -mt-12 h-full flex flex-col justify-center items-center">
-        <h1 className="text-3xl font-bold tracking-wider bg-gradient-to-r from-biruMuda1 to-ungu px-1 rounded-lg">
+        <Highlight className="text-3xl font-bold tracking-wider bg-gradient-to-r from-biruMuda1 to-ungu px-1 rounded-lg">
           SIKAT
-        </h1>
+        </Highlight>
         <Spacer y={1} />
-        <h2 className="text-xl font-bold">Semua Misi, OSIS Siap Beraksi!!</h2>
+        <h2 className="text-xl font-bold">
+          Semua Misi, <Highlight>OSIS</Highlight> Siap Beraksi!!
+        </h2>
         <Spacer y={2} />
         <Image src={Icon} priority alt="Logo SIKAT" width={256} height={256} />
         <Spacer y={2} />
