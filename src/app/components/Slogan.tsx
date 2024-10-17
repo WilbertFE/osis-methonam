@@ -1,12 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import FotoOsis from "/public/img/fotbar-osis.jpeg";
-import Icon from "/public/img/icon.png";
+import FotoOsis from "/public/img/fotbar.jpeg";
+import Icon from "/public/img/logo.png";
 import { Spacer } from "@nextui-org/spacer";
 import { Button } from "@nextui-org/button";
 import { Chip } from "@nextui-org/chip";
-// import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";

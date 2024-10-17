@@ -12,8 +12,9 @@ import {
 } from "@nextui-org/navbar";
 import { Link } from "@nextui-org/link";
 import Image from "next/image";
-import IconSIKAT from "/public/img/icon.png";
+import IconSIKAT from "/public/img/logo.png";
 import { Avatar } from "@nextui-org/avatar";
+import { Spacer } from "@nextui-org/spacer";
 
 export default function MainNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,14 +38,17 @@ export default function MainNavbar() {
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
     >
-      <NavbarContent className="sm:hidden" justify="start">
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        />
+      <NavbarContent justify="start">
+        <NavbarItem className="hidden lg:flex">
+          <Link href="#">Login</Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Avatar isBordered color="secondary" />
+        </NavbarItem>
       </NavbarContent>
 
       {/* Navbar Mobile */}
-      <NavbarContent className="sm:hidden pr-3" justify="center">
+      <NavbarContent className="sm:hidden pr-3 -mr-9" justify="center">
         <NavbarBrand>
           <Image src={IconSIKAT} alt="icon" height={128} width={128} />
         </NavbarBrand>
@@ -73,13 +77,10 @@ export default function MainNavbar() {
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Avatar isBordered color="secondary" />
-        </NavbarItem>
+      <NavbarContent className="sm:hidden" justify="end">
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        />
       </NavbarContent>
 
       <NavbarMenu className="dark:bg-transparent">
@@ -88,6 +89,7 @@ export default function MainNavbar() {
             <Link className="w-full" color="foreground" href="#" size="lg">
               {item}
             </Link>
+            <Spacer y={2} />
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
