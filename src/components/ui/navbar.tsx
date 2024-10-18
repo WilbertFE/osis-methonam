@@ -33,7 +33,7 @@ export default function MainNavbar() {
 
   return (
     <Navbar
-      className="dark:bg-transparent"
+      className="dark:bg-transparent z-[999]"
       isBordered
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
@@ -48,7 +48,7 @@ export default function MainNavbar() {
       </NavbarContent>
 
       {/* Navbar Mobile */}
-      <NavbarContent className="sm:hidden pr-3 -mr-9" justify="center">
+      <NavbarContent className="sm:hidden pr-3 -mr-8" justify="center">
         <NavbarBrand>
           <Image src={IconSIKAT} alt="icon" height={128} width={128} />
         </NavbarBrand>
@@ -83,7 +83,7 @@ export default function MainNavbar() {
         />
       </NavbarContent>
 
-      <NavbarMenu className="dark:bg-transparent">
+      <NavbarMenu className="dark:bg-transparent z-[999]">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link className="w-full" color="foreground" href="#" size="lg">

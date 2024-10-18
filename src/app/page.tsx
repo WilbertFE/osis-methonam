@@ -1,11 +1,11 @@
 import { Slogan, VisiMisi } from "./components";
+import TentangKami from "./components/TentangKami";
 
 export default function Home() {
   return (
     <>
-      <div className="w-full flex flex-col min-h-screen">
-        <Slogan />
-      </div>
+      <Slogan />
+      <TentangKami />
       <VisiMisi />
       {/* <Program />
           <Jurnal />

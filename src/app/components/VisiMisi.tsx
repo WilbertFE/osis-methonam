@@ -8,6 +8,7 @@ import TeknologiPhoto from "@/../public/img/teknologi.jpeg";
 import Image from "next/image";
 import { Spacer } from "@nextui-org/spacer";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import FeaturesSectionDemo from "@/components/blocks/features-section-demo-2";
 
 export default function VisiMisi() {
   const timeLineEntry: timeLineTypes[] = [
@@ -127,6 +128,8 @@ export default function VisiMisi() {
         description="Visi kami ialah mengaplikasikan program SIKAT di sekolah."
         data={timeLineEntry}
       />
+      <Spacer y={12} />
+      <FeaturesSectionDemo title="MISI" />
     </div>
   );
 }
