@@ -6,8 +6,8 @@ import React, { useEffect, useState } from "react";
 export const ImagesSlider = ({
   images,
   children,
-  overlay = true,
-  overlayClassName,
+  // overlay = true,
+  // overlayClassName,
   className,
   autoplay = true,
   direction = "up",
@@ -120,7 +120,7 @@ export const ImagesSlider = ({
   return (
     <div
       className={cn(
-        "overflow-hidden h-full w-full relative flex items-center justify-center",
+        "overflow-hidden opacity-95 h-full w-full relative flex items-center justify-center",
         className
       )}
       style={{
@@ -128,11 +128,11 @@ export const ImagesSlider = ({
       }}
     >
       {areImagesLoaded && children}
-      {areImagesLoaded && overlay && (
+      {/* {areImagesLoaded && overlay && (
         <div
-          className={cn("absolute inset-0 bg-black/20 z-40", overlayClassName)}
+          className={cn("absolute inset-0 bg-black/10 z-40", overlayClassName)}
         />
-      )}
+      )} */}
 
       {areImagesLoaded && (
         <AnimatePresence>

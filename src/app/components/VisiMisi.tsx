@@ -1,4 +1,4 @@
-import { Timeline } from "@/components/ui/timeline";
+import { Timeline as Visi } from "@/components/ui/timeline";
 import { timeLineTypes } from "@/types/timeLineTypes";
 import SolidaritasPhoto from "@/../public/img/solidaritas.jpeg";
 import IntegritasPhoto from "@/../public/img/integritas.jpeg";
@@ -8,7 +8,7 @@ import TeknologiPhoto from "@/../public/img/teknologi.jpeg";
 import Image from "next/image";
 import { Spacer } from "@nextui-org/spacer";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import FeaturesSectionDemo from "@/components/blocks/features-section-demo-2";
+import { FeaturesSectionDemo as Misi } from "@/components/blocks/features-section-demo-2";
 
 export default function VisiMisi() {
   const timeLineEntry: timeLineTypes[] = [
@@ -123,13 +123,13 @@ export default function VisiMisi() {
       <h1 className="text-3xl font-bold tracking-wider text-center">
         Visi - Misi
       </h1>
-      <Timeline
+      <Visi
         title="SIKAT"
         description="Visi kami ialah mengaplikasikan program SIKAT di sekolah."
         data={timeLineEntry}
       />
       <Spacer y={12} />
-      <FeaturesSectionDemo title="MISI" />
+      <Misi title="MISI" />
     </div>
   );
 }

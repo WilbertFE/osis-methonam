@@ -1,5 +1,4 @@
-import { Slogan, VisiMisi } from "./components";
-import TentangKami from "./components/TentangKami";
+import { Slogan, VisiMisi, TentangKami } from "./components";
 
 export default function Home() {
   return (

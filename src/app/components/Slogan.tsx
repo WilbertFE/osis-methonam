@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { Highlight } from "@/components/ui/hero-highlight";
-import { ImagesSlider } from "@/components/ui/images-slider";
+import { ImagesSlider as FotoOSIS } from "@/components/ui/images-slider";
 
 export default function Slogan() {
   const [mounted, setMounted] = useState(false);
@@ -31,16 +31,9 @@ export default function Slogan() {
 
   return (
     <div className="w-full flex flex-col min-h-screen">
-      <ImagesSlider
+      <FotoOSIS
         className="absolute top-0 left-0 right-0"
-        images={[
-          "img/fotbar.jpeg",
-          "img/solidaritas.jpeg",
-          "img/integritas.jpeg",
-          "img/kreatifitas.jpeg",
-          "img/akhlak.jpeg",
-          "img/teknologi.jpeg",
-        ]}
+        images={["img/fotbar.jpeg", "img/solidaritas.jpeg"]}
         direction="down"
       >
         <div className="z-10 -mb-8 h-full flex flex-col justify-center items-center">
@@ -86,7 +79,7 @@ export default function Slogan() {
             </Button>
           </Link>
         </div>
-      </ImagesSlider>
+      </FotoOSIS>
     </div>
   );
 }
