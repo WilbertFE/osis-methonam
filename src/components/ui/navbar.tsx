@@ -33,6 +33,7 @@ export default function MainNavbar() {
 
   return (
     <Navbar
+      shouldHideOnScroll
       className="dark:bg-transparent z-[999]"
       isBordered
       isMenuOpen={isMenuOpen}
