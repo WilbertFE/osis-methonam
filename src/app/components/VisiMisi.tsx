@@ -120,16 +120,15 @@ export default function VisiMisi() {
   ];
   return (
     <div className="w-full flex flex-col pt-36 pb-32">
-      <h1 className="text-3xl font-bold tracking-wider text-center">
-        Visi - Misi
-      </h1>
+      <h1 className="text-3xl font-bold tracking-wider text-center">Visi</h1>
       <Visi
         title="SIKAT"
         description="Visi kami ialah mengaplikasikan program SIKAT di sekolah."
         data={timeLineEntry}
       />
       <Spacer y={12} />
-      <Misi title="MISI" />
+      <h1 className="text-3xl font-bold text-center tracking-wider">Misi</h1>
+      <Misi />
     </div>
   );
 }

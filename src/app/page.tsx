@@ -1,6 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Slogan, VisiMisi, TentangKami } from "./components";
+import {
+  Slogan,
+  VisiMisi,
+  TentangKami,
+  Jurnal,
+  ProgramKerja,
+} from "./components";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -15,9 +21,9 @@ export default function Home() {
       <Slogan />
       <TentangKami />
       <VisiMisi />
-      {/* <Program />
-          <Jurnal />
-          <Agenda /> */}
+      <ProgramKerja />
+      <Jurnal />
+      {/* <Agenda /> */}
     </>
   );
 }

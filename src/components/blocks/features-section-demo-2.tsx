@@ -10,7 +10,7 @@ import {
   IconTerminal2,
 } from "@tabler/icons-react";
 
-export function FeaturesSectionDemo({ title }: { title: string }) {
+export function FeaturesSectionDemo() {
   const features = [
     {
       title: "Built for developers",
@@ -60,7 +60,6 @@ export function FeaturesSectionDemo({ title }: { title: string }) {
   ];
   return (
     <>
-      <h1 className="text-3xl font-bold text-center tracking-wider">{title}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  relative z-10 pb-10 pt-4 max-w-7xl mx-auto">
         {features.map((feature, index) => (
           <Feature key={feature.title} {...feature} index={index} />

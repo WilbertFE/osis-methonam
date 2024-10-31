@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { NextUIProvider } from "@nextui-org/system";
-import MainNavbar from "@/components/ui/navbar";
+import MainNavbar from "@/app/navbar";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 // import Footer from "@/components/ui/footer";
 

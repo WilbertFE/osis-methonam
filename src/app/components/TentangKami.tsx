@@ -1,6 +1,5 @@
-// import { TracingBeam } from "@/components/ui/tracing-beam";
 import { Spacer } from "@nextui-org/spacer";
-import { TracingBeamDemo as InformasiOSIS } from "../../components/blocks/TrackingBeamDemo";
+import { TracingBeamDemo as InformasiOSIS } from "../../components/blocks/tracing-beam-demo";
 
 export default function TentangKami() {
   return (
