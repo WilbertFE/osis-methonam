@@ -1,4 +1,5 @@
-import { AppleCardsCarouselDemo as Program } from "@/components/blocks/apple-cards-carousels-demo";
+import { CarouselDemo as Program } from "@/components/blocks/carousel-demo";
+import { Spacer } from "@nextui-org/spacer";
 
 export default function ProgramKerja() {
   return (
@@ -6,7 +7,10 @@ export default function ProgramKerja() {
       <h1 className="text-center font-bold tracking-wide text-3xl">
         Program Kerja
       </h1>
-      <Program />
+      <Spacer y={8} />
+      <div className="flex justify-center">
+        <Program />
+      </div>
     </div>
   );
 }
