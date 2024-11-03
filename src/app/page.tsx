@@ -6,6 +6,8 @@ import {
   TentangKami,
   Jurnal,
   ProgramKerja,
+  Agenda,
+  TentangOSIS,
 } from "./components";
 
 export default function Home() {
@@ -23,7 +25,8 @@ export default function Home() {
       <VisiMisi />
       <ProgramKerja />
       <Jurnal />
-      {/* <Agenda /> */}
+      <Agenda />
+      <TentangOSIS />
     </>
   );
 }

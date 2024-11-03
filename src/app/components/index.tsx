@@ -4,3 +4,4 @@ export { default as ProgramKerja } from "./ProgramKerja";
 export { default as Jurnal } from "./Jurnal";
 export { default as Agenda } from "./Agenda";
 export { default as TentangKami } from "./TentangKami";
+export { default as TentangOSIS } from "./TentangOSIS";
