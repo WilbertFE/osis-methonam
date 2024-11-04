@@ -20,15 +20,34 @@ export default function MainNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
-    "Home",
-    "Visi Misi",
-    "Program Kerja",
-    "Jurnal",
-    "Agenda",
-    "Tentang Kami",
-    "Tim SIKAT",
-    "Kontak",
-    "Tim Anti-Korupsi",
+    {
+      label: "Home",
+      to: "/",
+    },
+    {
+      label: "Tentang Kami",
+      to: "/tentang-kami",
+    },
+    {
+      label: "Jurnal",
+      to: "/jurnal",
+    },
+    {
+      label: "Agenda",
+      to: "/agenda",
+    },
+    {
+      label: "Tim SIKAT",
+      to: "/tim-sikat",
+    },
+    {
+      label: "Kontak",
+      to: "/kontak",
+    },
+    {
+      label: "Tim Anti-Korupsi",
+      to: "/tim-anti-korupsi",
+    },
   ];
 
   return (
@@ -87,8 +106,13 @@ export default function MainNavbar() {
       <NavbarMenu className="dark:bg-transparent z-[999]">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link className="w-full" color="foreground" href="#" size="lg">
-              {item}
+            <Link
+              className="w-full"
+              color="foreground"
+              href={item.to}
+              size="lg"
+            >
+              {item.label}
             </Link>
             <Spacer y={2} />
           </NavbarMenuItem>
