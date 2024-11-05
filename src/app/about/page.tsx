@@ -1,5 +1,5 @@
-import { TentangKami } from "@/components/fragments/TentangKami";
 import { ProgramKerja, VisiMisi } from "./components";
+import { TentangKami } from "@/components/fragments";
 
 export default function TentangKamiPage() {
   return (

@@ -26,27 +26,27 @@ export default function MainNavbar() {
     },
     {
       label: "Tentang Kami",
-      to: "/tentang-kami",
+      to: "/about",
     },
     {
       label: "Jurnal",
-      to: "/jurnal",
+      to: "/journal",
     },
     {
       label: "Agenda",
       to: "/agenda",
     },
     {
-      label: "Tim SIKAT",
-      to: "/tim-sikat",
+      label: "Forum Diskusi",
+      to: "/discussion",
     },
     {
       label: "Kontak",
-      to: "/kontak",
+      to: "/contact",
     },
     {
-      label: "Tim Anti-Korupsi",
-      to: "/tim-anti-korupsi",
+      label: "Ekstrakulikuler",
+      to: "/extracurricular",
     },
   ];
 
