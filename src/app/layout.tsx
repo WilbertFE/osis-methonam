@@ -4,7 +4,7 @@ import "./globals.css";
 import { NextUIProvider } from "@nextui-org/system";
 import MainNavbar from "@/app/navbar";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-// import Footer from "@/components/ui/footer";
+import { Footer } from "./footer";
 
 const spaceGrotesk = localFont({
   src: "./fonts/SpaceGrotesk-VariableFont_wght.woff2",
@@ -35,7 +35,7 @@ export default function RootLayout({
               <div className="container">
                 <div className="flex flex-wrap justify-center">{children}</div>
               </div>
-              {/* <Footer /> */}
+              <Footer />
             </main>
           </NextThemesProvider>
         </NextUIProvider>
