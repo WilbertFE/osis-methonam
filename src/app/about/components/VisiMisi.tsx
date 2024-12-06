@@ -1,5 +1,5 @@
 import { Timeline as Visi } from "@/components/ui/timeline";
-import { timeLineTypes } from "@/types/timeLineTypes";
+import { TimeLine } from "@/types/TimeLine";
 import SolidaritasPhoto from "@/../public/img/solidaritas.jpeg";
 import IntegritasPhoto from "@/../public/img/integritas.jpeg";
 import KreatifitasPhoto from "@/../public/img/kreatifitas.jpeg";
@@ -11,7 +11,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { FeaturesSectionDemo as Misi } from "@/components/blocks/features-section-demo-2";
 
 export default function VisiMisi() {
-  const timeLineEntry: timeLineTypes[] = [
+  const timeLineEntry: TimeLine[] = [
     {
       title: "Solidaritas",
       content: (

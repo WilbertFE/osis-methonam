@@ -1,10 +1,10 @@
 import { ProgramKerja, VisiMisi } from "./components";
-import { TentangKami } from "@/components/fragments";
+import { TentangOSIS } from "@/components/fragments";
 
 export default function TentangKamiPage() {
   return (
     <>
-      <TentangKami />
+      <TentangOSIS />
       <ProgramKerja />
       <VisiMisi />
     </>

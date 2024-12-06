@@ -6,14 +6,11 @@ import { Spacer } from "@nextui-org/spacer";
 import { Button } from "@nextui-org/button";
 import { Chip } from "@nextui-org/chip";
 
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import { Highlight } from "@/components/ui/hero-highlight";
 import { ImagesSlider as FotoOSIS } from "@/components/ui/images-slider";
 
 export default function Slogan() {
-  const { theme, setTheme } = useTheme();
-
   const visi = [
     "Solidaritas",
     "Integritas",
@@ -59,16 +56,15 @@ export default function Slogan() {
             ))}
           </div>
           <Spacer y={6} />
-          <Link href="#">
+          <Link href="/contact">
             <Button
               variant="shadow"
               color="primary"
               radius="lg"
               size="lg"
               className="tracking-wider font-medium"
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             >
-              {theme}
+              Hubungi
             </Button>
           </Link>
         </div>

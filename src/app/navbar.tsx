@@ -29,6 +29,10 @@ export default function MainNavbar() {
       to: "/about",
     },
     {
+      label: "Kontak",
+      to: "/contact",
+    },
+    {
       label: "Jurnal",
       to: "/journal",
     },
@@ -39,10 +43,6 @@ export default function MainNavbar() {
     {
       label: "Forum Diskusi",
       to: "/discussion",
-    },
-    {
-      label: "Kontak",
-      to: "/contact",
     },
     {
       label: "Ekstrakulikuler",

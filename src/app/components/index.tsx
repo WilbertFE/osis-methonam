@@ -1,2 +1,2 @@
 export { default as Slogan } from "./Slogan";
-export { default as TentangOSIS } from "./TentangOSIS";
+export { default as KataMereka } from "./KataMereka";

@@ -1,8 +1,8 @@
 import React from "react";
-import { InfiniteMovingCardsDemo as KataMereka } from "@/components/blocks/infinite-moving-cards-demo";
+import { InfiniteMovingCardsDemo } from "@/components/blocks/infinite-moving-cards-demo";
 import { Spacer } from "@nextui-org/spacer";
 
-export default function TentangOSIS() {
+export default function KataMereka() {
   return (
     <div className="flex flex-col w-full pt-36 pb-32">
       <h1 className="text-center font-bold text-3xl tracking-wide">
@@ -13,7 +13,7 @@ export default function TentangOSIS() {
       </span>
       <Spacer y={8} />
       <div className="flex justify-center">
-        <KataMereka />
+        <InfiniteMovingCardsDemo />
       </div>
     </div>
   );

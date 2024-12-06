@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Slogan, TentangOSIS } from "./components";
-import { TentangKami, Jurnal, Agenda } from "@/components/fragments";
+import { Slogan, KataMereka } from "./components";
+import { TentangOSIS, Jurnal, Agenda } from "@/components/fragments";
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false);
@@ -14,10 +14,10 @@ export default function HomePage() {
   return (
     <>
       <Slogan />
-      <TentangKami />
+      <TentangOSIS />
       <Jurnal />
       <Agenda />
-      <TentangOSIS />
+      <KataMereka />
     </>
   );
 }
