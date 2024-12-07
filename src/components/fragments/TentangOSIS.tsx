@@ -20,20 +20,22 @@ export default function TentangOSIS() {
         </>
       ),
       badge: "Pelantikan - 28 Oktober 2024",
-      image:
-        "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=3540&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image: "/img/fotbar.jpeg",
     },
 
     {
       title: "OSIS Periode 2023/2024",
       description: (
         <>
-          <p>Mengwujudkan SIKAT pada SMAS Methodist-6 Medan.</p>
+          <p>
+            Mengwujudkan SIKAT pada SMAS Methodist-6 Medan. Dengan mewujudkan
+            siswa yang solid, berintegritas, kreatif, berakhlak mulia, dan
+            mengaplikasikan teknologi.
+          </p>
         </>
       ),
       badge: "Harapan 1 tahun ke depan",
-      image:
-        "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80&w=3506&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image: "/img/solidaritas.jpeg",
     },
   ];
 

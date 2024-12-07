@@ -1,4 +1,4 @@
-import { CarouselDemo as Program } from "@/components/blocks/carousel-demo";
+import { AppleCardsCarouselDemo } from "@/components/blocks/apple-cards-carousel-demo";
 import { Spacer } from "@nextui-org/spacer";
 
 export default function ProgramKerja() {
@@ -9,7 +9,7 @@ export default function ProgramKerja() {
       </h1>
       <Spacer y={8} />
       <div className="flex justify-center">
-        <Program />
+        <AppleCardsCarouselDemo />
       </div>
     </div>
   );
