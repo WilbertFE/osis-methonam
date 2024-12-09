@@ -42,7 +42,7 @@ export default function TentangOSIS() {
   const pathname = usePathname();
 
   return (
-    <div className="w-full flex flex-col pb-32 pt-12">
+    <div className="w-full flex flex-col pb-32 pt-12 px-4">
       <h1 className="text-3xl tracking-wider font-bold">Tentang OSIS</h1>
       <Spacer y={4} />
       <TracingBeamDemo dummyContent={dummyContent} />
