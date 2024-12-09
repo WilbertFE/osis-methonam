@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { NextUIProvider } from "@nextui-org/system";
-import MainNavbar from "@/app/navbar";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { Footer } from "./footer";
+import LayoutWrapper from "./LayoutWrapper";
 
 const spaceGrotesk = localFont({
   src: "./fonts/SpaceGrotesk-VariableFont_wght.woff2",
@@ -30,13 +29,7 @@ export default function RootLayout({
             themes={["light", "dark"]}
             enableSystem={false}
           >
-            <main>
-              <MainNavbar />
-              <div className="container">
-                <div className="flex flex-wrap justify-center">{children}</div>
-              </div>
-              <Footer />
-            </main>
+            <LayoutWrapper>{children}</LayoutWrapper>
           </NextThemesProvider>
         </NextUIProvider>
       </body>
