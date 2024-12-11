@@ -2,9 +2,9 @@
 
 import React from "react";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
-import { Proker } from "@/types/Proker";
+import { Member } from "@/types/Member";
 
-export function AppleCardsCarouselDemo({ data }: { data: Proker[] }) {
+export function AppleCardsCarouselDemo({ data }: { data: Member[] }) {
   const cards = data.map((card, index) => (
     <Card key={card.src} card={card} index={index} />
   ));

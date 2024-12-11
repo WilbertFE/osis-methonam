@@ -1,4 +1,4 @@
-export type Card = {
+export type ExpandableCardData = {
   description: string;
   title: string;
   src: string;
