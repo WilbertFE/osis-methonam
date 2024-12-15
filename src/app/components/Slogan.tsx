@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Icon from "/public/img/logo.png";
 import { Spacer } from "@nextui-org/spacer";
-import { Button } from "@nextui-org/button";
-import { Chip } from "@nextui-org/chip";
+import { Button } from "@nextui-org/react";
+import { Chip } from "@nextui-org/react";
 
 import Link from "next/link";
 import { Highlight } from "@/components/ui/hero-highlight";

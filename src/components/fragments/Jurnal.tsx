@@ -1,21 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Spacer } from "@nextui-org/spacer";
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Spacer } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
 import { Divider } from "@nextui-org/divider";
-import { Image } from "@nextui-org/image";
-// import {
-//   Drawer,
-//   DrawerClose,
-//   DrawerContent,
-//   DrawerDescription,
-//   DrawerFooter,
-//   DrawerHeader,
-//   DrawerTitle,
-//   DrawerTrigger,
-// } from "@/components/ui/drawer";
-// import { Button } from "@/components/ui/button";
-// import { ScrollArea } from "@/components/ui/scroll-area";
-
+import { Image } from "@nextui-org/react";
 import {
   Drawer,
   DrawerContent,
@@ -27,7 +14,6 @@ import {
 } from "@nextui-org/react";
 
 export default function Jurnal() {
-  // const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (

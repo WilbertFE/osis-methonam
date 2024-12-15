@@ -6,7 +6,7 @@ import KreatifitasPhoto from "@/../public/img/kreatifitas.jpeg";
 import AkhlakPhoto from "@/../public/img/akhlak.jpeg";
 import TeknologiPhoto from "@/../public/img/teknologi.jpeg";
 import Image from "next/image";
-import { Spacer } from "@nextui-org/spacer";
+import { Spacer } from "@nextui-org/react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export default function Visi() {

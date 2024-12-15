@@ -1,6 +1,6 @@
 import { AppleCardsCarouselDemo } from "@/components/blocks/apple-cards-carousel-demo";
 import { Member } from "@/types/Member";
-import { Spacer } from "@nextui-org/spacer";
+import { Spacer } from "@nextui-org/react";
 import Image from "next/image";
 
 export default function Members() {

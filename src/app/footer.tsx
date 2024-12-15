@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LogoSikat from "@/../public/img/logo.png";
 import { Spacer } from "@nextui-org/spacer";
-import { Chip } from "@nextui-org/chip";
+import { Chip } from "@nextui-org/react";
 
 export function Footer() {
   const footerNav = [

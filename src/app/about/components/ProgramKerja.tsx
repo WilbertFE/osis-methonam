@@ -2,7 +2,7 @@
 
 import { ExpandableCardDemo } from "@/components/blocks/expandable-card-demo";
 import { ExpandableCardData } from "@/types/ExpandableCardData";
-import { Spacer } from "@nextui-org/spacer";
+import { Spacer } from "@nextui-org/react";
 
 export default function ProgramKerja() {
   return (

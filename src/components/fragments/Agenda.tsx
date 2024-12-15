@@ -1,7 +1,7 @@
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
-import { Image } from "@nextui-org/image";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
+import { Image } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
-import { Spacer } from "@nextui-org/spacer";
+import { Spacer } from "@nextui-org/react";
 import {
   Drawer,
   DrawerClose,

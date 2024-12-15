@@ -9,12 +9,12 @@ import {
   NavbarMenu,
   NavbarContent,
   NavbarItem,
-} from "@nextui-org/navbar";
-import { Link } from "@nextui-org/link";
+} from "@nextui-org/react";
+import { Link } from "@nextui-org/react";
 import Image from "next/image";
 import IconSIKAT from "/public/img/logo.png";
-import { Avatar } from "@nextui-org/avatar";
-import { Spacer } from "@nextui-org/spacer";
+import { Avatar } from "@nextui-org/react";
+import { Spacer } from "@nextui-org/react";
 
 export default function MainNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
