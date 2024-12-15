@@ -8,9 +8,9 @@ import {
   DrawerHeader,
   DrawerBody,
   DrawerFooter,
-  Button,
-  useDisclosure,
 } from "@nextui-org/react";
+import { useDisclosure } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 
 export default function Jurnal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
