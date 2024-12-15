@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Slogan, KataMereka } from "./components";
+import { Slogan, Testimoni } from "./components";
 import { TentangOSIS, Jurnal, Agenda } from "@/components/fragments";
 
 export default function HomePage() {
@@ -17,7 +17,7 @@ export default function HomePage() {
       <TentangOSIS />
       <Jurnal />
       <Agenda />
-      <KataMereka />
+      <Testimoni />
     </>
   );
 }

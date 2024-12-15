@@ -1,8 +1,18 @@
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
-import { Divider } from "@nextui-org/divider";
-import { Link } from "@nextui-org/link";
 import { Image } from "@nextui-org/image";
+import { Button } from "@nextui-org/react";
 import { Spacer } from "@nextui-org/spacer";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button as ShadcnButton } from "@/components/ui/button";
 
 export default function Agenda() {
   return (
@@ -13,35 +23,41 @@ export default function Agenda() {
       <Spacer y={8} />
       <div className="flex flex-col items-center gap-y-6">
         {[1, 2, 3, 4, 5].map((e, i) => (
-          <Card key={i} className="max-w-[400px]">
-            <CardHeader className="flex gap-3">
-              <Image
-                alt="nextui logo"
-                height={40}
-                radius="sm"
-                src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-                width={40}
-              />
-              <div className="flex flex-col">
-                <p className="text-md">NextUI</p>
-                <p className="text-small text-default-500">nextui.org</p>
-              </div>
+          <Card key={i} className="py-4">
+            <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+              <p className="text-tiny uppercase font-bold">Daily Mix</p>
+              <small className="text-default-500">12 Tracks</small>
+              <h4 className="font-bold text-large">Frontend Radio</h4>
             </CardHeader>
-            <Divider />
-            <CardBody>
-              <p>
-                Make beautiful websites regardless of your design experience.
-              </p>
+            <CardBody className="overflow-visible py-2">
+              <Image
+                alt="Card background"
+                className="object-cover rounded-xl"
+                src="https://nextui.org/images/hero-card-complete.jpeg"
+                width={270}
+              />
             </CardBody>
-            <Divider />
             <CardFooter>
-              <Link
-                isExternal
-                showAnchorIcon
-                href="https://github.com/nextui-org/nextui"
-              >
-                Visit source code on GitHub.
-              </Link>
+              <Drawer>
+                <DrawerTrigger>
+                  {" "}
+                  <ShadcnButton color="primary">Lihat</ShadcnButton>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <DrawerHeader>
+                    <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                    <DrawerDescription>
+                      This action cannot be undone.
+                    </DrawerDescription>
+                  </DrawerHeader>
+                  <DrawerFooter>
+                    <Button>Submit</Button>
+                    <DrawerClose>
+                      <ShadcnButton variant="outline">Cancel</ShadcnButton>
+                    </DrawerClose>
+                  </DrawerFooter>
+                </DrawerContent>
+              </Drawer>
             </CardFooter>
           </Card>
         ))}

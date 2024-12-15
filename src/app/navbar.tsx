@@ -21,7 +21,7 @@ export default function MainNavbar() {
 
   const menuItems = [
     {
-      label: "Home",
+      label: "Beranda",
       to: "/",
     },
     {
@@ -41,12 +41,12 @@ export default function MainNavbar() {
       to: "/agenda",
     },
     {
-      label: "Forum Diskusi",
-      to: "/discussion",
-    },
-    {
       label: "Ekstrakulikuler",
       to: "/extracurricular",
+    },
+    {
+      label: "Forum Diskusi",
+      to: "/discussion",
     },
   ];
 
