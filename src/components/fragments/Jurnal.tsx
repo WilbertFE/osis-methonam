@@ -1,3 +1,5 @@
+"use client";
+
 import { Spacer } from "@nextui-org/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
 import { Divider } from "@nextui-org/divider";
