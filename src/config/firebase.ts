@@ -6,6 +6,7 @@ import {
   collection,
   deleteDoc,
   getDocs,
+  getDoc,
 } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -40,10 +41,19 @@ async function deleteJournal({ journalId }: { journalId: string }) {
   await deleteDoc(journalRef);
 }
 
+async function getJournal({ journalId }: { journalId: string }) {
+  const journalRef = doc(db, "journals", journalId);
+  const journalSnapshot = await getDoc(journalRef);
+
+  if (!journalSnapshot.exists()) return console.log("No such document!");
+
+  return journalSnapshot.data();
+}
+
 async function getJournals() {
-  const querySnapshot = await getDocs(collection(db, "journals"));
+  const journalsSnapshot = await getDocs(collection(db, "journals"));
   const journals: DocumentData[] = [];
-  querySnapshot.forEach((doc) => {
+  journalsSnapshot.forEach((doc) => {
     journals.push(doc.data());
   });
   return journals;
@@ -60,4 +70,37 @@ async function pushAgenda() {
   });
 }
 
-export { pushJournal, pushAgenda, deleteJournal, getJournals };
+async function deleteAgenda({ agendaId }: { agendaId: string }) {
+  const agendaRef = doc(db, "agendas", agendaId);
+
+  await deleteDoc(agendaRef);
+}
+
+async function getAgendas() {
+  const agendasSnapshot = await getDocs(collection(db, "agendas"));
+  const agendas: DocumentData[] = [];
+  agendasSnapshot.forEach((doc) => {
+    agendas.push(doc.data());
+  });
+  return agendas;
+}
+
+async function getAgenda({ agendaId }: { agendaId: string }) {
+  const agendaRef = doc(db, "agendas", agendaId);
+  const agendaSnapshot = await getDoc(agendaRef);
+
+  if (!agendaSnapshot.exists()) return console.log("No such document!");
+
+  return agendaSnapshot.data();
+}
+
+export {
+  pushJournal,
+  pushAgenda,
+  deleteJournal,
+  getJournals,
+  getJournal,
+  deleteAgenda,
+  getAgendas,
+  getAgenda,
+};

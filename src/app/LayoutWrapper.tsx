@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Footer } from "@/app/footer";
 import MainNavbar from "./navbar";
 import Loading from "./loading";
+import { SessionProvider } from "next-auth/react";
 
 export default function LayoutWrapper({
   children,
@@ -21,7 +22,7 @@ export default function LayoutWrapper({
   }, []);
 
   return (
-    <>
+    <SessionProvider>
       {!isContentLoaded && <Loading />}
       {isContentLoaded && (
         <>
@@ -34,6 +35,6 @@ export default function LayoutWrapper({
           {displayFooter && <Footer />}
         </>
       )}
-    </>
+    </SessionProvider>
   );
 }
