@@ -1,6 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { doc, setDoc, collection } from "firebase/firestore";
+import { DocumentData, getFirestore } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  collection,
+  deleteDoc,
+  getDocs,
+} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -17,7 +23,7 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
-// Menambahkan Jurnal
+// Journal
 async function pushJournal() {
   const journalRef = doc(collection(db, "journals"));
 
@@ -29,6 +35,21 @@ async function pushJournal() {
   });
 }
 
+async function deleteJournal({ journalId }: { journalId: string }) {
+  const journalRef = doc(collection(db, "journals", journalId));
+  await deleteDoc(journalRef);
+}
+
+async function getJournals() {
+  const querySnapshot = await getDocs(collection(db, "journals"));
+  const journals: DocumentData[] = [];
+  querySnapshot.forEach((doc) => {
+    journals.push(doc.data());
+  });
+  return journals;
+}
+
+// Agenda
 async function pushAgenda() {
   const agendaRef = doc(collection(db, "agendas"));
 
@@ -39,4 +60,4 @@ async function pushAgenda() {
   });
 }
 
-export { pushJournal, pushAgenda };
+export { pushJournal, pushAgenda, deleteJournal, getJournals };

@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-async-client-component */
 "use client";
 
-import { Spacer } from "@nextui-org/react";
+import { Chip, Spacer } from "@nextui-org/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
 import { Divider } from "@nextui-org/divider";
 import { Image } from "@nextui-org/react";
@@ -13,23 +14,18 @@ import {
 } from "@nextui-org/react";
 import { useDisclosure } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
-// import { pushJournal } from "@/config/firebase";
+import { getJournals } from "@/config/firebase";
 
-export default function Jurnal() {
+export default async function Jurnal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-  // const handlePushJournal = async () => {
-  //   onOpen();
-  //   await pushJournal();
-  //   console.log("tes");
-  // };
+  const journals = await getJournals();
 
   return (
     <div className="w-full flex flex-col pt-36 pb-32 px-8">
       <h1 className="text-center font-bold text-3xl tracking-wide">Jurnal</h1>
       <Spacer y={8} />
       <div className="flex flex-col items-center gap-y-6">
-        {...new Array(5).fill("").map((e, i) => (
+        {journals.map((journal, i) => (
           <div key={i}>
             <Card className="max-w-[400px]">
               <CardHeader className="flex gap-3">
@@ -41,24 +37,20 @@ export default function Jurnal() {
                   width={40}
                 />
                 <div className="flex flex-col">
-                  <p className="text-md">NextUI</p>
-                  <p className="text-small text-default-500">nextui.org</p>
+                  <p className="text-md">{journal.title}</p>
+                  <p className="text-small text-default-500">{journal.date}</p>
                 </div>
               </CardHeader>
               <Divider />
               <CardBody>
-                <p className="line-clamp-4">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
-                  totam dolorem earum dolores corporis placeat cumque quae
-                  expedita voluptates. Eius voluptatibus excepturi nisi tempora
-                  inventore possimus deserunt impedit nesciunt. Repellat.
-                </p>
+                <p className="line-clamp-4">{journal.content}</p>
               </CardBody>
               <Divider />
-              <CardFooter>
+              <CardFooter className="flex justify-around">
                 <Button color="primary" onPress={onOpen}>
                   Detail
                 </Button>
+                <Chip>{journal.author}</Chip>
               </CardFooter>
             </Card>
             <Drawer isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -66,31 +58,9 @@ export default function Jurnal() {
                 {(onClose) => (
                   <>
                     <DrawerHeader className="flex flex-col gap-1">
-                      Drawer Title
+                      {journal.title}
                     </DrawerHeader>
-                    <DrawerBody>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam pulvinar risus non risus hendrerit venenatis.
-                        Pellentesque sit amet hendrerit risus, sed porttitor
-                        quam.
-                      </p>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam pulvinar risus non risus hendrerit venenatis.
-                        Pellentesque sit amet hendrerit risus, sed porttitor
-                        quam.
-                      </p>
-                      <p>
-                        Magna exercitation reprehenderit magna aute tempor
-                        cupidatat consequat elit dolor adipisicing. Mollit dolor
-                        eiusmod sunt ex incididunt cillum quis. Velit duis sit
-                        officia eiusmod Lorem aliqua enim laboris do dolor
-                        eiusmod. Et mollit incididunt nisi consectetur esse
-                        laborum eiusmod pariatur proident Lorem eiusmod et.
-                        Culpa deserunt nostrud ad veniam.
-                      </p>
-                    </DrawerBody>
+                    <DrawerBody>{journal.content}</DrawerBody>
                     <DrawerFooter>
                       <Button color="danger" variant="light" onPress={onClose}>
                         Close
