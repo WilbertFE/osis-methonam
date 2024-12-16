@@ -52,12 +52,12 @@ export function Footer() {
     <footer className="flex flex-wrap bg-slate-800 p-4">
       <div className="w-full">
         {footerNav.map((nav, i) => (
-          <>
-            <Link className="block py-1" key={i} href={nav.href}>
+          <div key={i}>
+            <Link className="block py-1" href={nav.href}>
               {nav.label}
             </Link>
             <Divider />
-          </>
+          </div>
         ))}
       </div>
       <Spacer y={4} />
@@ -79,8 +79,8 @@ export function Footer() {
           <Spacer y={2} />
           <div className="flex flex-wrap items-center">
             {footerSubMenus.map((menu, i) => (
-              <>
-                <Link className="block" key={i} href={menu.href}>
+              <div key={i}>
+                <Link className="block" href={menu.href}>
                   {menu.label}
                 </Link>
                 {i + 1 !== footerSubMenus.length && (
@@ -90,7 +90,7 @@ export function Footer() {
                     <Spacer x={1.5} />
                   </>
                 )}
-              </>
+              </div>
             ))}
           </div>
         </div>

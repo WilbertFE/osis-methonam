@@ -13,9 +13,16 @@ import {
 } from "@nextui-org/react";
 import { useDisclosure } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
+// import { pushJournal } from "@/config/firebase";
 
 export default function Jurnal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  // const handlePushJournal = async () => {
+  //   onOpen();
+  //   await pushJournal();
+  //   console.log("tes");
+  // };
 
   return (
     <div className="w-full flex flex-col pt-36 pb-32 px-8">
@@ -23,8 +30,8 @@ export default function Jurnal() {
       <Spacer y={8} />
       <div className="flex flex-col items-center gap-y-6">
         {...new Array(5).fill("").map((e, i) => (
-          <>
-            <Card key={i} className="max-w-[400px]">
+          <div key={i}>
+            <Card className="max-w-[400px]">
               <CardHeader className="flex gap-3">
                 <Image
                   alt="nextui logo"
@@ -96,7 +103,7 @@ export default function Jurnal() {
                 )}
               </DrawerContent>
             </Drawer>
-          </>
+          </div>
         ))}
       </div>
     </div>
