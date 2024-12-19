@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useSession } from "next-auth/react";
@@ -5,14 +6,14 @@ import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 export default function DashboardPage() {
-  const { data: session, status } = useSession();
+  const { data: session, status }: { data: any; status: string } = useSession();
   const router = useRouter();
-
-  console.log(session, status);
 
   useEffect(() => {
     if (status === "unauthenticated") router.push("/login");
-  }, [status, router]);
+    if (status === "authenticated" && session?.user.role !== "admin")
+      router.push("/");
+  }, [status, router, session?.user.role]);
 
   return <div>admin dashboard</div>;
 }

@@ -15,6 +15,7 @@ import Image from "next/image";
 import IconSIKAT from "/public/img/logo.png";
 import { Avatar } from "@nextui-org/react";
 import { Spacer } from "@nextui-org/react";
+import { signIn } from "next-auth/react";
 
 export default function MainNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,33 +23,42 @@ export default function MainNavbar() {
   const menuItems = [
     {
       label: "Beranda",
-      to: "/",
+      href: "/",
     },
     {
       label: "Tentang Kami",
-      to: "/about",
+      href: "/about",
     },
     {
       label: "Kontak",
-      to: "/contact",
+      href: "/contact",
     },
     {
       label: "Jurnal",
-      to: "/journal",
+      href: "/journal",
     },
     {
       label: "Agenda",
-      to: "/agenda",
+      href: "/agenda",
     },
     {
       label: "Ekstrakulikuler",
-      to: "/extracurricular",
+      href: "/extracurricular",
     },
     {
       label: "Forum Diskusi",
-      to: "/discussion",
+      href: "/discussion",
+    },
+    {
+      label: "Login",
     },
   ];
+
+  const handleLogin = (label: string) => {
+    if (label === "Login") {
+      signIn();
+    }
+  };
 
   return (
     <Navbar
@@ -63,7 +73,12 @@ export default function MainNavbar() {
           <Link href="#">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Avatar isBordered color="secondary" />
+          <Avatar
+            onClick={() => signIn()}
+            isBordered
+            color="secondary"
+            className="cursor-pointer"
+          />
         </NavbarItem>
       </NavbarContent>
 
@@ -107,9 +122,14 @@ export default function MainNavbar() {
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
-              className="w-full"
+              className={`w-full ${
+                item.label === "Login"
+                  ? "text-blue-600 underline cursor-pointer"
+                  : ""
+              }`}
+              onPress={() => handleLogin(item.label)}
               color="foreground"
-              href={item.to}
+              href={item.href}
               size="lg"
             >
               {item.label}
