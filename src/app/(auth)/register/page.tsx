@@ -1,31 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { Form, Input, Button } from "@nextui-org/react";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [action, setAction] = useState<null | string>(null);
-  const { push } = useRouter();
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    try {
-      const res = await signIn("credentials", {
-        redirect: false,
-        callbackUrl: "/dashboard",
-        email: e.target.email.value,
-        password: e.target.password.value,
-      });
-      if (!res?.error) {
-        push("/dashboard");
-      } else {
-        console.log(res.error);
-      }
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (
@@ -38,6 +20,15 @@ export default function LoginPage() {
       >
         <Input
           isRequired
+          errorMessage="Please enter a valid fullname"
+          label="Fullname"
+          labelPlacement="outside"
+          name="fullname"
+          placeholder="Enter your fullname"
+          type="text"
+        />
+        <Input
+          isRequired
           errorMessage="Please enter a valid email"
           label="Email"
           labelPlacement="outside"
@@ -47,11 +38,11 @@ export default function LoginPage() {
         />
         <Input
           isRequired
-          errorMessage="Please enter a valid password"
-          label="Password"
+          errorMessage="Confirm a valid password"
+          label="Confirm Password"
           labelPlacement="outside"
           name="password"
-          placeholder="Enter your password"
+          placeholder="Confirm your password"
           type="password"
         />
 

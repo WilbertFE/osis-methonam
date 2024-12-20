@@ -10,15 +10,17 @@ import {
   NavbarContent,
   NavbarItem,
 } from "@nextui-org/react";
-import { Link } from "@nextui-org/react";
 import Image from "next/image";
 import IconSIKAT from "/public/img/logo.png";
 import { Avatar } from "@nextui-org/react";
 import { Spacer } from "@nextui-org/react";
-import { signIn } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function MainNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { status } = useSession();
+  console.log(status);
 
   const menuItems = [
     {
@@ -54,8 +56,10 @@ export default function MainNavbar() {
     },
   ];
 
-  const handleLogin = (label: string) => {
-    if (label === "Login") {
+  const handleClick = () => {
+    if (status === "authenticated") {
+      signOut();
+    } else if (status === "unauthenticated") {
       signIn();
     }
   };
@@ -121,19 +125,25 @@ export default function MainNavbar() {
       <NavbarMenu className="dark:bg-transparent z-[999]">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              className={`w-full ${
-                item.label === "Login"
-                  ? "text-blue-600 underline cursor-pointer"
-                  : ""
-              }`}
-              onPress={() => handleLogin(item.label)}
-              color="foreground"
-              href={item.href}
-              size="lg"
-            >
-              {item.label}
-            </Link>
+            {item.label === "Login" ? (
+              <Link
+                className="w-full text-blue-600 underline"
+                color="foreground"
+                href={item.href || ""}
+                onClick={handleClick}
+              >
+                {status === "authenticated" ? "Logout" : "Login"}
+              </Link>
+            ) : (
+              <Link
+                className="w-full"
+                color="foreground"
+                href={item.href || ""}
+              >
+                {item.label}
+              </Link>
+            )}
+
             <Spacer y={2} />
           </NavbarMenuItem>
         ))}

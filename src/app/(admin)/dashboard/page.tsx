@@ -10,10 +10,14 @@ export default function DashboardPage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (status === "unauthenticated") router.push("/login");
-    if (status === "authenticated" && session?.user.role !== "admin")
+    if (status === "unauthenticated") {
       router.push("/");
-  }, [status, router, session?.user.role]);
+    } else {
+      if (session !== undefined && session?.user.role !== "admin") {
+        router.push("/");
+      }
+    }
+  }, [status, router, session?.user.role, session]);
 
   return <div>admin dashboard</div>;
 }

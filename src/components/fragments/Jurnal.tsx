@@ -14,7 +14,7 @@ import {
 } from "@nextui-org/react";
 import { useDisclosure } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
-import { getJournals } from "@/config/firebase";
+import { getJournals } from "@/lib/firebase/init";
 
 export default async function Jurnal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

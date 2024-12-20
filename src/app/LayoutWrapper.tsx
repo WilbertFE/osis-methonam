@@ -12,13 +12,9 @@ export default function LayoutWrapper({
   children: React.ReactNode;
 }>) {
   const [isContentLoaded, setIsContentLoaded] = useState(false);
-  const [displayFooter, setDisplayFooter] = useState(false);
 
   useEffect(() => {
     setIsContentLoaded(true);
-    setTimeout(() => {
-      setDisplayFooter(true);
-    }, 100);
   }, []);
 
   return (
@@ -27,12 +23,12 @@ export default function LayoutWrapper({
       {isContentLoaded && (
         <>
           <MainNavbar />
-          <main>
+          <main className="min-h-screen">
             <div className="container">
               <div className="flex flex-wrap justify-center">{children}</div>
             </div>
           </main>
-          {displayFooter && <Footer />}
+          <Footer />
         </>
       )}
     </SessionProvider>

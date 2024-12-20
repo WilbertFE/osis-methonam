@@ -1,5 +1,7 @@
-import { initializeApp } from "firebase/app";
-import { DocumentData, getFirestore } from "firebase/firestore";
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
+import { getFirestore, query, where } from "firebase/firestore";
+import { app } from "./init";
+import { DocumentData } from "firebase/firestore";
 import {
   doc,
   setDoc,
@@ -9,20 +11,26 @@ import {
   getDoc,
 } from "firebase/firestore";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: process.env.firebaseApiKey,
-  authDomain: "osis-methonam.firebaseapp.com",
-  projectId: "osis-methonam",
-  storageBucket: "osis-methonam.firebasestorage.app",
-  messagingSenderId: process.env.firebaseMessagingSenderId,
-  appId: process.env.firebaseAppId,
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
+
+// Register
+export async function register(
+  data: { fullname: string; email: string; password: string; role?: string },
+  callback: Function
+) {
+  const q = query(collection(db, "users"), where("email", "==", data.email));
+  const snapshot = await getDocs(q);
+  const users = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  if (users.length > 0) {
+    callback({ status: false, message: "Email already exist" });
+  } else {
+    data.role = "admin";
+  }
+}
 
 // Journal
 async function pushJournal() {
