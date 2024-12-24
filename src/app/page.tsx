@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { Slogan, Testimoni } from "./components";
 import { TentangOSIS, Jurnal, Agenda } from "@/components/fragments";

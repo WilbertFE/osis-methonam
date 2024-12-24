@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { NextUIProvider } from "@nextui-org/react";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
 import LayoutWrapper from "./LayoutWrapper";
 
 const spaceGrotesk = localFont({
@@ -22,16 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${spaceGrotesk.className} antialiased min-h-screen`}>
-        <NextUIProvider>
-          <NextThemesProvider
-            attribute="class"
-            defaultTheme="dark"
-            themes={["light", "dark"]}
-            enableSystem={false}
-          >
-            <LayoutWrapper>{children}</LayoutWrapper>
-          </NextThemesProvider>
-        </NextUIProvider>
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );

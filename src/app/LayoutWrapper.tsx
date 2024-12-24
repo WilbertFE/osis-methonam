@@ -5,6 +5,8 @@ import { Footer } from "@/app/footer";
 import MainNavbar from "./navbar";
 import Loading from "./loading";
 import { SessionProvider } from "next-auth/react";
+import { NextUIProvider } from "@nextui-org/system";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export default function LayoutWrapper({
   children,
@@ -12,25 +14,40 @@ export default function LayoutWrapper({
   children: React.ReactNode;
 }>) {
   const [isContentLoaded, setIsContentLoaded] = useState(false);
+  const [attribute, setAttribute] = useState("");
+  const [themes, setThemes] = useState<string[] | undefined>(undefined);
 
   useEffect(() => {
     setIsContentLoaded(true);
+    setAttribute("class");
+    setThemes(["light", "dark"]);
   }, []);
 
   return (
-    <SessionProvider>
+    <>
       {!isContentLoaded && <Loading />}
       {isContentLoaded && (
-        <>
-          <MainNavbar />
-          <main className="min-h-screen">
-            <div className="container">
-              <div className="flex flex-wrap justify-center">{children}</div>
-            </div>
-          </main>
-          <Footer />
-        </>
+        <NextUIProvider>
+          <NextThemesProvider
+            attribute={attribute}
+            themes={themes}
+            defaultTheme="dark"
+            enableSystem={false}
+          >
+            <SessionProvider>
+              <MainNavbar />
+              <main className="min-h-screen">
+                <div className="container">
+                  <div className="flex flex-wrap justify-center">
+                    {children}
+                  </div>
+                </div>
+              </main>
+              <Footer />
+            </SessionProvider>
+          </NextThemesProvider>
+        </NextUIProvider>
       )}
-    </SessionProvider>
+    </>
   );
 }

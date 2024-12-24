@@ -12,7 +12,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Button as ShadcnButton } from "@/components/ui/button";
+// import { Button as ShadcnButton } from "@/components/ui/button";
 
 export default function Agenda() {
   return (
@@ -39,10 +39,7 @@ export default function Agenda() {
             </CardBody>
             <CardFooter>
               <Drawer>
-                <DrawerTrigger>
-                  {" "}
-                  <ShadcnButton color="primary">Lihat</ShadcnButton>
-                </DrawerTrigger>
+                <DrawerTrigger> Lihat</DrawerTrigger>
                 <DrawerContent>
                   <DrawerHeader>
                     <DrawerTitle>Are you absolutely sure?</DrawerTitle>
@@ -52,9 +49,7 @@ export default function Agenda() {
                   </DrawerHeader>
                   <DrawerFooter>
                     <Button>Submit</Button>
-                    <DrawerClose>
-                      <ShadcnButton variant="outline">Cancel</ShadcnButton>
-                    </DrawerClose>
+                    <DrawerClose>Cancel</DrawerClose>
                   </DrawerFooter>
                 </DrawerContent>
               </Drawer>
