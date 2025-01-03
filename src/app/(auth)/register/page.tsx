@@ -6,8 +6,19 @@ import { useState } from "react";
 export default function RegisterPage() {
   const [action, setAction] = useState<null | string>(null);
 
-  const handleLogin = async (e: any) => {
+  const handleRegister = async (e: any) => {
     e.preventDefault();
+    fetch("/api/auth/register", {
+      method: "POST",
+      headers: {
+        type: "application/json",
+      },
+      body: JSON.stringify({
+        fullname: e.target.fullname.value,
+        email: e.target.email.value,
+        password: e.target.password.value,
+      }),
+    });
   };
 
   return (
@@ -16,7 +27,7 @@ export default function RegisterPage() {
         className="w-full max-w-xs flex flex-col gap-4"
         validationBehavior="native"
         onReset={() => setAction("reset")}
-        onSubmit={handleLogin}
+        onSubmit={(e) => handleRegister(e)}
       >
         <Input
           isRequired
@@ -39,7 +50,7 @@ export default function RegisterPage() {
         <Input
           isRequired
           errorMessage="Confirm a valid password"
-          label="Confirm Password"
+          label="Password"
           labelPlacement="outside"
           name="password"
           placeholder="Confirm your password"

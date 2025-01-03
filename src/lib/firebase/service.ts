@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-function-type */
-import { getFirestore, query, where } from "firebase/firestore";
+import { addDoc, getFirestore, query, where } from "firebase/firestore";
 import { app } from "./init";
 import { DocumentData } from "firebase/firestore";
 import {
@@ -10,14 +12,17 @@ import {
   getDocs,
   getDoc,
 } from "firebase/firestore";
+import bcrypt from "bcryptjs";
 
 const db = getFirestore(app);
 
 // Register
-export async function register(
-  data: { fullname: string; email: string; password: string; role?: string },
-  callback: Function
-) {
+export async function register(data: {
+  fullname: string;
+  email: string;
+  password: string;
+  role?: string;
+}) {
   const q = query(collection(db, "users"), where("email", "==", data.email));
   const snapshot = await getDocs(q);
   const users = snapshot.docs.map((doc) => ({
@@ -26,9 +31,17 @@ export async function register(
   }));
 
   if (users.length > 0) {
-    callback({ status: false, message: "Email already exist" });
+    return { status: false, statusCode: 400, message: "Email already exist" };
   } else {
     data.role = "admin";
+    data.password = await bcrypt.hash(data.password, 10);
+
+    try {
+      await addDoc(collection(db, "users"), data);
+      return { status: true, statusCode: 200, message: "Register Success" };
+    } catch (error: any) {
+      return { status: false, statusCode: 400, message: "Register Failed" };
+    }
   }
 }
 
