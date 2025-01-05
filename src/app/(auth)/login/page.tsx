@@ -7,10 +7,15 @@ import { useState } from "react";
 
 export default function LoginPage() {
   const [action, setAction] = useState<null | string>(null);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { push } = useRouter();
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
+    setError("");
+    setIsLoading(true);
+
     try {
       const res = await signIn("credentials", {
         redirect: false,
@@ -19,17 +24,24 @@ export default function LoginPage() {
         password: e.target.password.value,
       });
       if (!res?.error) {
+        setIsLoading(false);
+        e.target.reset();
         push("/dashboard");
       } else {
-        console.log(res.error);
+        if (res.status === 401) {
+          setError("Email or password is wrong!");
+          setIsLoading(false);
+        }
       }
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
+    <div className="min-h-screen flex flex-col justify-center items-center">
+      {error && <p className="text-red-600 text-center mb-3">{error}</p>}
       <Form
         className="w-full max-w-xs flex flex-col gap-4"
         validationBehavior="native"
@@ -56,10 +68,10 @@ export default function LoginPage() {
         />
 
         <div className="flex gap-2">
-          <Button color="primary" type="submit">
-            Submit
+          <Button color="primary" type="submit" disabled={isLoading}>
+            {isLoading ? "Loading..." : "Submit"}
           </Button>
-          <Button type="reset" variant="flat">
+          <Button type="reset" variant="flat" onPress={() => setError("")}>
             Reset
           </Button>
         </div>

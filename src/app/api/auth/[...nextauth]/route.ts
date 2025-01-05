@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { login } from "@/lib/firebase/service";
+import { compare } from "bcryptjs";
 import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -29,16 +31,12 @@ const authOptions: AuthOptions = {
           email: string;
           password: string;
         };
-        const user: any = {
-          id: 1,
-          email: "wilbertbernadi699@gmail.com",
-          password: "12345678",
-          role: "admin",
-        };
-        if (
-          email === "wilbertbernadi699@gmail.com" &&
-          password === "12345678"
-        ) {
+        const user: any = await login({ email });
+        if (user) {
+          const confirmPassword = await compare(password, user.password);
+          if (!confirmPassword) {
+            return null;
+          }
           return user;
         } else {
           return null;

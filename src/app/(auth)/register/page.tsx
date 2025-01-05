@@ -1,14 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { Form, Input, Button } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function RegisterPage() {
   const [action, setAction] = useState<null | string>(null);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { push } = useRouter();
 
   const handleRegister = async (e: any) => {
     e.preventDefault();
-    fetch("/api/auth/register", {
+    setError("");
+    setIsLoading(true);
+
+    const res = await fetch("/api/auth/register", {
       method: "POST",
       headers: {
         type: "application/json",
@@ -19,10 +26,19 @@ export default function RegisterPage() {
         password: e.target.password.value,
       }),
     });
+    if (res.status === 200) {
+      e.target.reset();
+      setIsLoading(false);
+      push("/login");
+    } else {
+      setError("Email already in use");
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
+    <div className="min-h-screen flex flex-col justify-center items-center">
+      {error && <p className="text-red-600 text-center mb-3">{error}</p>}
       <Form
         className="w-full max-w-xs flex flex-col gap-4"
         validationBehavior="native"
@@ -58,10 +74,10 @@ export default function RegisterPage() {
         />
 
         <div className="flex gap-2">
-          <Button color="primary" type="submit">
-            Submit
+          <Button color="primary" type="submit" disabled={isLoading}>
+            {isLoading ? "Loading..." : "Submit"}
           </Button>
-          <Button type="reset" variant="flat">
+          <Button type="reset" variant="flat" onPress={() => setError("")}>
             Reset
           </Button>
         </div>

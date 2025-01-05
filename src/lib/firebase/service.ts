@@ -31,6 +31,7 @@ export async function register(data: {
   }));
 
   if (users.length > 0) {
+    console.log("tes");
     return { status: false, statusCode: 400, message: "Email already exist" };
   } else {
     data.role = "admin";
@@ -42,6 +43,22 @@ export async function register(data: {
     } catch (error: any) {
       return { status: false, statusCode: 400, message: "Register Failed" };
     }
+  }
+}
+
+export async function login(data: { email: string }) {
+  const q = query(collection(db, "users"), where("email", "==", data.email));
+  const snapshot = await getDocs(q);
+
+  const user = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  if (user) {
+    return user[0];
+  } else {
+    return null;
   }
 }
 
