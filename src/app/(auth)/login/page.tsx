@@ -5,11 +5,13 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function LoginPage() {
+export default function LoginPage({ searchParams }: any) {
   const [action, setAction] = useState<null | string>(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { push } = useRouter();
+
+  const callbackUrl = searchParams.callbackUrl || "/";
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
@@ -26,7 +28,7 @@ export default function LoginPage() {
       if (!res?.error) {
         setIsLoading(false);
         e.target.reset();
-        push("/dashboard");
+        push(callbackUrl);
       } else {
         if (res.status === 401) {
           setError("Email or password is wrong!");

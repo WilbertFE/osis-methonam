@@ -20,7 +20,6 @@ import Link from "next/link";
 export default function MainNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { status } = useSession();
-  console.log(status);
 
   const menuItems = [
     {
@@ -55,6 +54,8 @@ export default function MainNavbar() {
       label: "Login",
     },
   ];
+
+  console.log(status);
 
   const handleClick = () => {
     if (status === "authenticated") {
@@ -130,7 +131,7 @@ export default function MainNavbar() {
                 className="w-full text-blue-600 underline"
                 color="foreground"
                 href={item.href || ""}
-                onClick={handleClick}
+                onClick={() => handleClick()}
               >
                 {status === "authenticated" ? "Logout" : "Login"}
               </Link>
