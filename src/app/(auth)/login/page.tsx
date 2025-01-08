@@ -4,6 +4,7 @@ import { Form, Input, Button } from "@nextui-org/react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { FaGoogle } from "react-icons/fa";
 
 export default function LoginPage({ searchParams }: any) {
   const [action, setAction] = useState<null | string>(null);
@@ -68,7 +69,16 @@ export default function LoginPage({ searchParams }: any) {
           placeholder="Enter your password"
           type="password"
         />
-
+        <hr />
+        <Button
+          type="button"
+          variant="flat"
+          className="w-full"
+          color="success"
+          onPress={() => signIn("google", { callbackUrl, redirect: false })}
+        >
+          <FaGoogle /> Login with google
+        </Button>
         <div className="flex gap-2">
           <Button color="primary" type="submit" disabled={isLoading}>
             {isLoading ? "Loading..." : "Submit"}
