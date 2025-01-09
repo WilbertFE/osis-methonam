@@ -50,9 +50,9 @@ const authOptions: AuthOptions = {
       authorization: {
         params: {
           redirect_uri:
-            process.env.NODE_ENV === "development"
-              ? "http://localhost:3000/api/auth/callback/google"
-              : "https://website-osis-methonam.vercel.app/api/auth/callback/google",
+            process.env.NODE_ENV === "production"
+              ? "https://website-osis-methonam.vercel.app/api/auth/callback/google"
+              : "http://localhost:3000/api/auth/callback/google",
         },
       },
     }),
