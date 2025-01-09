@@ -22,7 +22,7 @@ import bcrypt from "bcryptjs";
 
 const db = getFirestore(app);
 
-// Register
+// Registerr
 export async function register(data: {
   fullname: string;
   email: string;
