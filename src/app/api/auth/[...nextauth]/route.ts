@@ -47,14 +47,6 @@ const authOptions: AuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_OAUTH_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET || "",
-      authorization: {
-        params: {
-          redirect_uri:
-            process.env.NODE_ENV === "production"
-              ? "https://website-osis-methonam.vercel.app/api/auth/callback/google"
-              : "http://localhost:3000/api/auth/callback/google",
-        },
-      },
     }),
   ],
   callbacks: {
