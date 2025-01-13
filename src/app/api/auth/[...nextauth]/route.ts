@@ -91,14 +91,6 @@ const authOptions: AuthOptions = {
 
       return session;
     },
-    async redirect({ url, baseUrl }) {
-      return baseUrl;
-    },
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log("Account:", account);
-      console.log("Profil:", profile);
-      return true;
-    },
   },
   pages: {
     signIn: "/login",
