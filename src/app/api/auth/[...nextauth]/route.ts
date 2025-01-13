@@ -96,7 +96,7 @@ const authOptions: AuthOptions = {
     },
     async signIn({ user, account, profile, email, credentials }) {
       console.log("Account:", account);
-      console.log("Profile:", profile);
+      console.log("Profil:", profile);
       return true;
     },
   },
