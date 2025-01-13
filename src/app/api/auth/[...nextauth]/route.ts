@@ -100,6 +100,9 @@ const authOptions: AuthOptions = {
       return true;
     },
   },
+  pages: {
+    signIn: "/login",
+  },
 };
 
 const handler = NextAuth(authOptions);
