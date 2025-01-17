@@ -14,6 +14,24 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        pathname: "/**",
+        protocol: "http",
+        hostname: "localhost",
+        port: "3000",
+      },
+      {
+        pathname: "/**",
+        protocol: "https",
+        hostname: "nextui.org",
+        port: "",
+      },
+      {
+        protocol: "https",
+        pathname: "/**",
+        hostname: "avatars.githubusercontent.com",
+        port: "",
+      },
     ],
   },
 };

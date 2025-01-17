@@ -5,7 +5,7 @@
 import { Chip, Spacer } from "@nextui-org/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
 import { Divider } from "@nextui-org/divider";
-import { Image } from "@nextui-org/react";
+import Image from "next/image";
 import {
   Drawer,
   DrawerContent,
@@ -18,6 +18,7 @@ import { Button } from "@nextui-org/react";
 import { getJournals } from "@/lib/firebase/service";
 import { useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
+import { ScrollArea } from "../ui/scroll-area";
 
 export default function Jurnal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -48,7 +49,6 @@ export default function Jurnal() {
                     <Image
                       alt="nextui logo"
                       height={40}
-                      radius="sm"
                       src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
                       width={40}
                     />
@@ -75,21 +75,38 @@ export default function Jurnal() {
                   <DrawerContent>
                     {(onClose) => (
                       <>
-                        <DrawerHeader className="flex flex-col gap-1">
+                        <DrawerHeader className="flex flex-col gap-1 mt-14">
                           {journal.title}
                         </DrawerHeader>
-                        <DrawerBody>{journal.content}</DrawerBody>
+                        <DrawerBody>
+                          <ScrollArea className="h-full w-full rounded-md">
+                            <Image
+                              src="/img/osis.jpg"
+                              alt="jurnal.jpg"
+                              width={360}
+                              height={360}
+                              className="w-full rounded-lg"
+                            />
+                            <Spacer y={2} />
+                            <p className="indent-4">
+                              {journal.content} Lorem ipsum, dolor sit amet
+                              consectetur adipisicing elit. Pariatur dolores
+                              eligendi, modi recusandae nemo ipsum quidem.
+                              Provident delectus distinctio officia?
+                            </p>
+                          </ScrollArea>
+                        </DrawerBody>
                         <DrawerFooter>
                           <Button
                             color="danger"
                             variant="light"
                             onPress={onClose}
                           >
-                            Close
+                            Tutup
                           </Button>
-                          <Button color="primary" onPress={onClose}>
+                          {/* <Button color="primary" onPress={onClose}>
                             Action
-                          </Button>
+                          </Button> */}
                         </DrawerFooter>
                       </>
                     )}
