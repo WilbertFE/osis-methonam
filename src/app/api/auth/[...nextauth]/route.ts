@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { login, loginWithGoogle } from "@/lib/firebase/service";
-import { compare } from "bcryptjs";
+import { loginWithGoogle } from "@/lib/firebase/service";
 import NextAuth, { AuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import { v4 as uuidv4 } from "uuid";
 import GoogleProvider from "next-auth/providers/google";
 
 const authOptions: AuthOptions = {
@@ -12,38 +11,6 @@ const authOptions: AuthOptions = {
   },
   secret: process.env.AUTH_SECRET,
   providers: [
-    CredentialsProvider({
-      type: "credentials",
-      name: "Credentials",
-      credentials: {
-        email: {
-          label: "Email",
-          type: "email",
-          placeholder: "type your email",
-        },
-        password: {
-          label: "Password",
-          type: "password",
-          placeholder: "type your password",
-        },
-      },
-      async authorize(credentials, req) {
-        const { email, password } = credentials as {
-          email: string;
-          password: string;
-        };
-        const user: any = await login({ email });
-        if (user) {
-          const confirmPassword = await compare(password, user.password);
-          if (!confirmPassword) {
-            return null;
-          }
-          return user;
-        } else {
-          return null;
-        }
-      },
-    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_OAUTH_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET || "",
@@ -51,15 +18,11 @@ const authOptions: AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, account, profile, user }: any) {
-      if (account?.provider === "credentials") {
-        token.email = user.email;
-        token.fullname = user.fullname;
-        token.role = user.role;
-      }
       if (account?.provider === "google") {
         const data = {
           fullname: user.name,
           email: user.email,
+          username: `user-${uuidv4()}`,
           type: "google",
         };
         await loginWithGoogle(
@@ -69,6 +32,7 @@ const authOptions: AuthOptions = {
               token.email = result.data.email;
               token.fullname = result.data.fullname || "";
               token.role = result.data.role;
+              token.username = result.data.username;
             }
           }
         );
@@ -86,6 +50,9 @@ const authOptions: AuthOptions = {
         }
         if ("role" in token) {
           session.user.role = token.role;
+        }
+        if ("username" in token) {
+          session.user.username = token.username;
         }
       }
 

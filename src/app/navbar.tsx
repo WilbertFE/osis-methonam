@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -14,12 +15,22 @@ import Image from "next/image";
 import IconSIKAT from "/public/img/logo.png";
 import { Avatar } from "@nextui-org/react";
 import { Spacer } from "@nextui-org/react";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function MainNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { status } = useSession();
+  const { status, data: session }: any = useSession();
+
+  console.log("sesssion: ", session);
 
   const menuItems = [
     {
@@ -50,20 +61,9 @@ export default function MainNavbar() {
       label: "Forum Diskusi",
       href: "/discussion",
     },
-    {
-      label: "Login",
-    },
   ];
 
   console.log(status);
-
-  const handleClick = () => {
-    if (status === "authenticated") {
-      signOut();
-    } else if (status === "unauthenticated") {
-      signIn();
-    }
-  };
 
   return (
     <Navbar
@@ -73,17 +73,39 @@ export default function MainNavbar() {
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
     >
+      {/* Navbar mobile */}
       <NavbarContent justify="start">
         <NavbarItem className="hidden lg:flex">
           <Link href="#">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Avatar
-            onClick={() => signIn()}
-            isBordered
-            color="secondary"
-            className="cursor-pointer"
-          />
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Avatar isBordered color="secondary" className="cursor-pointer" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="z-[9999]">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {status === "authenticated" ? (
+                <>
+                  <DropdownMenuItem>
+                    <Link href={`/${session.user?.username}`}>Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href={`/${session.user?.username}/settings`}>
+                      Settings
+                    </Link>
+                  </DropdownMenuItem>
+                </>
+              ) : (
+                <DropdownMenuItem className="cursor-pointer">
+                  <Link href="/login" className="w-full">
+                    Login
+                  </Link>
+                </DropdownMenuItem>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </NavbarItem>
       </NavbarContent>
 
@@ -126,24 +148,9 @@ export default function MainNavbar() {
       <NavbarMenu className="dark:bg-transparent z-[999]">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            {item.label === "Login" ? (
-              <Link
-                className="w-full text-blue-600 underline"
-                color="foreground"
-                href={item.href || ""}
-                onClick={() => handleClick()}
-              >
-                {status === "authenticated" ? "Logout" : "Login"}
-              </Link>
-            ) : (
-              <Link
-                className="w-full"
-                color="foreground"
-                href={item.href || ""}
-              >
-                {item.label}
-              </Link>
-            )}
+            <Link className="w-full" color="foreground" href={item.href || ""}>
+              {item.label}
+            </Link>
 
             <Spacer y={2} />
           </NavbarMenuItem>
