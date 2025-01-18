@@ -10,10 +10,13 @@ export default function Journals() {
   return (
     <div className="w-full flex flex-col pt-36 pb-32 px-8">
       <h1 className="text-center font-bold text-3xl tracking-wide">Jurnal</h1>
-      <Spacer y={8} />
+
       <div className="flex flex-col items-center gap-y-6">
         {[1, 2, 3].map((val, i) => (
-          <Journal key={i} />
+          <>
+            <Spacer y={2} />
+            <Journal key={i} />
+          </>
         ))}
         <Spacer y={4} />
         <Link href="/journals">

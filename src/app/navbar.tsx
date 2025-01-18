@@ -51,7 +51,7 @@ export default function MainNavbar() {
     },
     {
       label: "Agenda",
-      href: "/agenda",
+      href: "/agendas",
     },
     {
       label: "Ekstrakulikuler",
@@ -148,10 +148,14 @@ export default function MainNavbar() {
       <NavbarMenu className="dark:bg-transparent z-[999]">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link className="w-full" color="foreground" href={item.href || ""}>
+            <Link
+              onClick={() => setIsMenuOpen(false)}
+              className="w-full"
+              color="foreground"
+              href={item.href || ""}
+            >
               {item.label}
             </Link>
-
             <Spacer y={2} />
           </NavbarMenuItem>
         ))}

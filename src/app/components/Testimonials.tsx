@@ -3,7 +3,7 @@ import { InfiniteMovingCardsDemo } from "@/components/blocks/infinite-moving-car
 import { Spacer } from "@nextui-org/spacer";
 // import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
-export default function Testimoni() {
+export default function Testimonials() {
   // const testimonials = [
   //   {
   //     quote:

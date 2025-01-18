@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Hero, Testimoni } from "./components";
-import { TentangOSIS } from "@/components/fragments";
+import { AboutUs, Hero, Testimonials } from "./components";
 import { Journals } from "@/app/components";
 import { Agendas } from "./components";
 
@@ -17,10 +16,10 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <TentangOSIS />
+      <AboutUs />
       <Journals />
       <Agendas />
-      <Testimoni />
+      <Testimonials />
     </>
   );
 }

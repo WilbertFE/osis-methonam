@@ -1,13 +1,13 @@
 "use client";
 
 import { Spacer } from "@nextui-org/spacer";
-import { TracingBeamDemo } from "../blocks/tracing-beam-demo";
+import { TracingBeamDemo } from "../../components/blocks/tracing-beam-demo";
 import { Dummy } from "@/types/Dummy";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function TentangOSIS() {
+export default function AboutUs() {
   const dummyContent: Dummy[] = [
     {
       title: "OSIS Periode 2024/2025",
