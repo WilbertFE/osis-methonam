@@ -19,6 +19,8 @@ import { Button } from "@nextui-org/react";
 import { ScrollArea } from "../ui/scroll-area";
 import { Chip } from "@nextui-org/react";
 
+// commit
+
 export default function Journal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
