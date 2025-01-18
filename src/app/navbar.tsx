@@ -47,7 +47,7 @@ export default function MainNavbar() {
     },
     {
       label: "Jurnal",
-      href: "/journal",
+      href: "/journals",
     },
     {
       label: "Agenda",

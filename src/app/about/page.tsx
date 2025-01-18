@@ -1,4 +1,4 @@
-import { ProgramKerja, Visi, Misi, Members } from "./components";
+import { Visi, Misi } from "./components";
 import { TentangOSIS } from "@/components/fragments";
 
 export default function About() {
@@ -7,8 +7,8 @@ export default function About() {
       <TentangOSIS />
       <Visi />
       <Misi />
-      <ProgramKerja />
-      <Members />
+      {/* <ProgramKerja /> */}
+      {/* <Members /> */}
     </>
   );
 }
