@@ -11,10 +11,10 @@ export default function Agendas() {
 
       <div className="flex flex-col items-center gap-y-6">
         {[1, 2, 3].map((e, i) => (
-          <>
+          <div key={i}>
             <Spacer y={2} />
-            <Agenda key={i} />
-          </>
+            <Agenda />
+          </div>
         ))}
         <Link href="/journals">
           <Button

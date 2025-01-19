@@ -13,10 +13,10 @@ export default function Journals() {
 
       <div className="flex flex-col items-center gap-y-6">
         {[1, 2, 3].map((val, i) => (
-          <>
+          <div key={i}>
             <Spacer y={2} />
-            <Journal key={i} />
-          </>
+            <Journal />
+          </div>
         ))}
         <Spacer y={4} />
         <Link href="/journals">
