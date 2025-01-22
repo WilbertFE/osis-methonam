@@ -14,7 +14,7 @@ export default function LoginPage({ searchParams }: any) {
         variant="flat"
         className="w-full"
         color="success"
-        onPress={() => signIn("google", { callbackUrl, redirect: false })}
+        onPress={() => signIn("google", { callbackUrl })}
       >
         <FaGoogle /> Login with google
       </Button>

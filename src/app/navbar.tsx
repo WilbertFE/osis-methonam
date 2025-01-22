@@ -15,7 +15,7 @@ import Image from "next/image";
 import IconSIKAT from "/public/img/logo.png";
 import { Avatar } from "@nextui-org/react";
 import { Spacer } from "@nextui-org/react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -89,12 +89,26 @@ export default function MainNavbar() {
               {status === "authenticated" ? (
                 <>
                   <DropdownMenuItem>
-                    <Link href={`/${session.user?.username}`}>Profile</Link>
+                    <Link
+                      href={`/${session.user?.username}`}
+                      className="w-full h-full"
+                    >
+                      Profile
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <Link href={`/${session.user?.username}/settings`}>
+                    <Link
+                      href={`/${session.user?.username}/settings`}
+                      className="w-full h-full"
+                    >
                       Settings
                     </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => signOut({ callbackUrl: "/" })}
+                    className="text-red-600"
+                  >
+                    Logout
                   </DropdownMenuItem>
                 </>
               ) : (

@@ -1,3 +1,5 @@
+"use client";
+
 import { Separator } from "@/components/ui/separator";
 import {
   MoveRight,
@@ -5,6 +7,7 @@ import {
   Settings2,
   LogOut,
 } from "lucide-react";
+import { signOut } from "next-auth/react";
 
 export default function Settings() {
   return (
@@ -23,7 +26,10 @@ export default function Settings() {
           <MoveRight />
         </div>
         <Separator className="my-2" />
-        <div className="flex gap-x-2">
+        <div
+          className="flex gap-x-2 cursor-pointer"
+          onClick={() => signOut({ callbackUrl: "/" })}
+        >
           <LogOut color="#ff0000" />
           <span className="flex-1 line-clamp-1 text-red-600">Log out</span>
         </div>
