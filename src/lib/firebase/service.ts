@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import { app } from "./init";
 import { doc, collection, getDocs } from "firebase/firestore";
+import { User } from "@/types/User";
 
 const db = getFirestore(app);
 
@@ -33,5 +34,27 @@ export async function loginWithGoogle(data: any, callback: any) {
     await addDoc(collection(db, "users"), data).then(() => {
       callback({ status: true, data: data });
     });
+  }
+}
+
+// user
+export async function getUserByUsername(
+  username: string,
+  callback: (result: { status: boolean; user: User | null }) => User | null
+) {
+  const q = query(collection(db, "users"), where("username", "==", username));
+  const snapshot = await getDocs(q);
+
+  const user = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as User[] | [];
+
+  if (user.length === 0) {
+    return callback({ status: false, user: null });
+  }
+
+  if (user.length > 0) {
+    return callback({ status: true, user: user[0] });
   }
 }
