@@ -1,4 +1,3 @@
-import { Spacer } from "@nextui-org/react";
 import { Hero, Info, Settings } from "./components";
 import { getUserByUsername } from "@/lib/firebase/service";
 import { User } from "@/types/User";
@@ -20,11 +19,8 @@ export default async function page({
 
   return (
     <>
-      <Spacer y={6} />
       <Hero user={user} />
-      <Spacer y={6} />
       <Info />
-      <Spacer y={6} />
       <Settings />
     </>
   );

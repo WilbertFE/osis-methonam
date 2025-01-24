@@ -5,16 +5,14 @@ import { useState } from "react";
 import {
   Navbar,
   NavbarBrand,
-  NavbarMenuToggle,
-  NavbarMenuItem,
-  NavbarMenu,
   NavbarContent,
   NavbarItem,
-} from "@nextui-org/react";
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+} from "@heroui/navbar";
 import Image from "next/image";
 import IconSIKAT from "/public/img/logo.png";
-import { Avatar } from "@nextui-org/react";
-import { Spacer } from "@nextui-org/react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import {
@@ -25,6 +23,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function MainNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -81,7 +80,10 @@ export default function MainNavbar() {
         <NavbarItem>
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <Avatar isBordered color="secondary" className="cursor-pointer" />
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" alt="@WFE" />
+                <AvatarFallback>WFE</AvatarFallback>
+              </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="z-[9999]">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -94,14 +96,6 @@ export default function MainNavbar() {
                       className="w-full h-full"
                     >
                       Profile
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link
-                      href={`/${session.user?.username}/settings`}
-                      className="w-full h-full"
-                    >
-                      Settings
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem
@@ -170,7 +164,7 @@ export default function MainNavbar() {
             >
               {item.label}
             </Link>
-            <Spacer y={2} />
+            <div className="my-2"></div>
           </NavbarMenuItem>
         ))}
       </NavbarMenu>

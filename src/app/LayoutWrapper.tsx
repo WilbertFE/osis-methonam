@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Footer } from "@/app/footer";
 import MainNavbar from "./navbar";
 import Loading from "./loading";
 import { SessionProvider } from "next-auth/react";
@@ -43,7 +42,6 @@ export default function LayoutWrapper({
                   </div>
                 </div>
               </main>
-              <Footer />
             </SessionProvider>
           </NextThemesProvider>
         </NextUIProvider>

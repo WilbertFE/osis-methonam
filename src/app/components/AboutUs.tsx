@@ -1,9 +1,8 @@
 "use client";
 
-import { Spacer } from "@nextui-org/spacer";
 import { TracingBeamDemo } from "../../components/blocks/tracing-beam-demo";
 import { Dummy } from "@/types/Dummy";
-import { Button } from "@nextui-org/react";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -44,17 +43,11 @@ export default function AboutUs() {
   return (
     <div className="w-full flex flex-col pb-32 pt-12 px-4">
       <h1 className="text-3xl tracking-wider font-bold">Tentang OSIS</h1>
-      <Spacer y={4} />
+      <div className="my-4"></div>
       <TracingBeamDemo dummyContent={dummyContent} />
       {pathname !== "/about" && (
         <Link href="/about" className="mx-auto">
-          <Button
-            size="lg"
-            radius="sm"
-            className="mx-auto text-white p-4 tracking-wide"
-            color="success"
-            variant="shadow"
-          >
+          <Button className="mx-auto text-white p-4 tracking-wide">
             Kenali
           </Button>
         </Link>

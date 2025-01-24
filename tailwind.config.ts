@@ -1,3 +1,4 @@
+import {heroui} from '@heroui/theme';
 import type { Config } from "tailwindcss";
 import { nextui } from "@nextui-org/theme";
 import { default as flattenColorPalette } from "tailwindcss/lib/util/flattenColorPalette";
@@ -10,6 +11,7 @@ const config = {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@heroui/theme/dist/components/navbar.js"
   ],
   prefix: "",
   theme: {
@@ -45,7 +47,7 @@ const config = {
     },
   },
   // eslint-disable-next-line @typescript-eslint/no-require-imports
-  plugins: [require("tailwindcss-animate"), nextui(), addVariablesForColors],
+  plugins: [require("tailwindcss-animate"),nextui(),addVariablesForColors,heroui()],
 } satisfies Config;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

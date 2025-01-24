@@ -2,14 +2,12 @@
 
 import Image from "next/image";
 import Icon from "/public/img/logo.png";
-import { Spacer } from "@nextui-org/spacer";
-import { Button } from "@nextui-org/react";
-import { Chip } from "@nextui-org/react";
-
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Highlight } from "@/components/ui/hero-highlight";
+import { Badge } from "@/components/ui/badge";
 
-export default function Slogan() {
+export default function Hero() {
   const visi = [
     "Solidaritas",
     "Integritas",
@@ -24,37 +22,22 @@ export default function Slogan() {
         <Highlight className="text-3xl font-bold tracking-wider bg-gradient-to-r from-biruMuda1 to-ungu px-1 rounded-lg">
           SIKAT
         </Highlight>
-        <Spacer y={1} />
+        <div className="my-2"></div>
         <h2 className="text-xl font-bold">
           Semua Misi, <Highlight>OSIS</Highlight> Siap Beraksi!!
         </h2>
-        <Spacer y={2} />
+        <div className="my-2"></div>
         <Image src={Icon} priority alt="Logo SIKAT" width={256} height={256} />
-        <Spacer y={2} />
+        <div className="my-2"></div>
         <div className="flex gap-2 tracking-wide flex-wrap justify-center">
           {visi.map((item, i) => (
-            <Chip
-              key={i}
-              variant="dot"
-              color="primary"
-              className="text-white border-biruMuda1"
-            >
-              {item}
-            </Chip>
+            <Badge key={i}>{item}</Badge>
           ))}
         </div>
-        <Spacer y={6} />
-        <Link href="/contact">
-          <Button
-            variant="shadow"
-            color="primary"
-            radius="lg"
-            size="lg"
-            className="tracking-wider font-medium"
-          >
-            Hubungi
-          </Button>
-        </Link>
+        <div className="my-4"></div>
+        <Button asChild className="tracking-wider font-medium">
+          <Link href="/contact">Hubungi</Link>
+        </Button>
       </div>
     </div>
   );
