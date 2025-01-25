@@ -106,10 +106,8 @@ export default function MainNavbar() {
                   </DropdownMenuItem>
                 </>
               ) : (
-                <DropdownMenuItem className="cursor-pointer">
-                  <Link href="/login" className="w-full">
-                    Login
-                  </Link>
+                <DropdownMenuItem asChild className="cursor-pointer">
+                  <Link href="/login">Login</Link>
                 </DropdownMenuItem>
               )}
             </DropdownMenuContent>
@@ -117,7 +115,7 @@ export default function MainNavbar() {
         </NavbarItem>
       </NavbarContent>
 
-      {/* Navbar Mobile */}
+      {/* Navbar Mobile Icon */}
       <NavbarContent className="sm:hidden pr-3 -mr-8" justify="center">
         <NavbarBrand>
           <Image src={IconSIKAT} alt="icon" height={128} width={128} />
@@ -153,6 +151,7 @@ export default function MainNavbar() {
         />
       </NavbarContent>
 
+      {/* Navbar - Mobile */}
       <NavbarMenu className="dark:bg-transparent z-[999]">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>

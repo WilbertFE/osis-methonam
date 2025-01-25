@@ -8,7 +8,7 @@ const spaceGrotesk = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "OSIS Methonam",
+  title: "OSIS METHONAM",
   description: "Website OSIS SMAS Methodist-6 Medan",
 };
 

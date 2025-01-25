@@ -2,7 +2,7 @@ import { Hero, Info, Settings } from "./components";
 import { getUserByUsername } from "@/lib/firebase/service";
 import { User } from "@/types/User";
 
-export default async function page({
+export default async function UserPage({
   params,
 }: {
   params: Promise<{ username: string }>;
