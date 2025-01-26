@@ -10,4 +10,5 @@ export type User = {
   image: string;
   created_at: Timestamp;
   updated_at: Timestamp;
+  bio: string;
 };

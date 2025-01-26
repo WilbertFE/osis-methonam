@@ -15,7 +15,7 @@ export default function Settings({ user }: { user: User | null | undefined }) {
           <div className="flex flex-col border p-3 rounded-lg">
             <div
               className="flex gap-x-2 cursor-pointer"
-              onClick={() => signOut({ callbackUrl: "/" })}
+              onClick={() => signOut({ callbackUrl: "/login" })}
             >
               <LogOut color="#ff0000" />
               <span className="flex-1 line-clamp-1 text-red-600">Log out</span>

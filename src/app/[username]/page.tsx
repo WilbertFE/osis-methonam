@@ -19,9 +19,13 @@ export default async function UserPage({
 
   return (
     <>
-      <Hero user={user} />
-      <Info user={user} />
-      <Settings user={user} />
+      {user && (
+        <>
+          <Hero user={user} />
+          <Info user={user} />
+          <Settings user={user} />
+        </>
+      )}
     </>
   );
 }

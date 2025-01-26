@@ -21,6 +21,14 @@ export default function Hero({ user }: { user: User | null | undefined }) {
         <span className="line-clamp-1 text-sm">@{user?.username}</span>
       </div>
       <div className="my-2"></div>
+      <div className="text-center">
+        <p className="line-clamp-2 text-sm">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem non
+          perspiciatis eligendi pariatur ipsa dignissimos quaerat soluta
+          dolorum! Architecto, repudiandae.
+        </p>
+      </div>
+      <div className="my-2"></div>
     </div>
   );
 }

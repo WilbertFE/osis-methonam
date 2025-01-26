@@ -96,14 +96,14 @@ export default function MainNavbar() {
                   <DropdownMenuItem>
                     <Link
                       href={`/${session.user?.username}`}
-                      className="w-full h-full"
+                      className="w-full h-full cursor-pointer"
                     >
                       Profile
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    onClick={() => signOut({ callbackUrl: "/" })}
-                    className="text-red-600"
+                    onClick={() => signOut({ callbackUrl: "/login" })}
+                    className="text-red-600 cursor-pointer"
                   >
                     Logout
                   </DropdownMenuItem>
