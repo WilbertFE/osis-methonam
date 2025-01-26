@@ -16,13 +16,36 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 // import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { FormEvent } from "react";
 
 export default function Info({ user }: { user: User }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data: session }: any = useSession();
-  // const [username, setUsername] = useState(user.username);
-  // const [name, setName] = useState(user.fullname);
-  // const [bio, setBio] = useState(user.bio);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const username = data.get("username");
+    const fullname = data.get("fullname");
+    const bio = data.get("bio");
+
+    try {
+      const newData = await fetch("/api/users", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullname,
+          username,
+          bio,
+        }),
+      });
+      console.log("newData: ", newData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -45,41 +68,47 @@ export default function Info({ user }: { user: User }) {
                     Edit profilmu. Simpan perubahan jika sudah yakin.
                   </DialogDescription>
                 </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="name" className="text-right">
-                      Name
-                    </Label>
-                    <Input
-                      id="name"
-                      value="Pedro Duarte"
-                      className="col-span-3"
-                    />
+                <form onSubmit={(e) => handleSubmit(e)}>
+                  <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="fullname" className="text-right">
+                        Name
+                      </Label>
+                      <Input
+                        id="fullname"
+                        name="fullname"
+                        className="col-span-3"
+                        defaultValue={user.fullname}
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="username" className="text-right">
+                        Username
+                      </Label>
+                      <Input
+                        id="username"
+                        name="username"
+                        className="col-span-3"
+                        defaultValue={user.username}
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="bio" className="text-right">
+                        Bio
+                      </Label>
+                      <Textarea
+                        defaultValue={user.bio}
+                        id="bio"
+                        name="bio"
+                        placeholder="Type your message here."
+                        className="col-span-3"
+                      />
+                    </div>
                   </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="username" className="text-right">
-                      Username
-                    </Label>
-                    <Input
-                      id="username"
-                      value="@peduarte"
-                      className="col-span-3"
-                    />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="bio" className="text-right">
-                      Bio
-                    </Label>
-                    <Textarea
-                      id="bio"
-                      placeholder="Type your message here."
-                      className="col-span-3"
-                    />
-                  </div>
-                </div>
-                <DialogFooter>
-                  <Button type="submit">Save changes</Button>
-                </DialogFooter>
+                  <DialogFooter>
+                    <Button type="submit">Save changes</Button>
+                  </DialogFooter>
+                </form>
               </DialogContent>
             </Dialog>
 

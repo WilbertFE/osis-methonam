@@ -1,6 +1,7 @@
 import { Hero, Info, Settings } from "./components";
 import { getUserByUsername } from "@/lib/firebase/service";
 import { User } from "@/types/User";
+import Link from "next/link";
 
 export default async function UserPage({
   params,
@@ -16,6 +17,20 @@ export default async function UserPage({
       return user;
     }
   );
+
+  // if 404
+  if (!user)
+    return (
+      <div className="mt-16">
+        <h1>User not found 404</h1>
+        <Link
+          href="/"
+          className="text-sm underline text-blue-600 text-center block"
+        >
+          home
+        </Link>
+      </div>
+    );
 
   return (
     <>
