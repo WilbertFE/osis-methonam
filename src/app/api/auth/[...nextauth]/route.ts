@@ -25,6 +25,7 @@ const authOptions: AuthOptions = {
           username: `user-${uuidv4()}`,
           image: user.image,
           type: "google",
+          bio: "",
         };
         await loginWithGoogle(
           data,
@@ -35,6 +36,7 @@ const authOptions: AuthOptions = {
               token.role = result.data.role;
               token.username = result.data.username;
               token.image = result.data.image;
+              token.bio = result.data.bio;
             }
           }
         );
@@ -58,6 +60,9 @@ const authOptions: AuthOptions = {
         }
         if ("image" in token) {
           session.user.image = token.image;
+        }
+        if ("bio" in token) {
+          session.user.bio = token.bio;
         }
       }
 

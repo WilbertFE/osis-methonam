@@ -37,7 +37,7 @@ export default function LayoutWrapper({
               <MainNavbar />
               <main className="min-h-screen">
                 <div className="container">
-                  <div className="flex flex-wrap justify-center">
+                  <div className="flex flex-wrap gap-y-4 justify-center">
                     {children}
                   </div>
                 </div>

@@ -7,7 +7,6 @@ import {
   query,
   updateDoc,
   where,
-  Timestamp,
 } from "firebase/firestore";
 import { app } from "./init";
 import { doc, collection, getDocs } from "firebase/firestore";
@@ -32,10 +31,11 @@ export async function loginWithGoogle(data: any, callback: any) {
     });
   } else {
     data.role = "member";
+    const now = new Date().toISOString();
     await addDoc(collection(db, "users"), {
       ...data,
-      created_at: Timestamp.now(),
-      updated_at: Timestamp.now(),
+      created_at: now,
+      updated_at: now,
     }).then(() => {
       callback({ status: true, data: data });
     });

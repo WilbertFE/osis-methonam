@@ -20,8 +20,8 @@ export default async function UserPage({
   return (
     <>
       <Hero user={user} />
-      <Info />
-      <Settings />
+      <Info user={user} />
+      <Settings user={user} />
     </>
   );
 }

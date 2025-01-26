@@ -81,7 +81,10 @@ export default function MainNavbar() {
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" alt="@WFE" />
+                <AvatarImage
+                  src={session?.user?.image || "https://github.com/shadcn.png"}
+                  alt="@WFE"
+                />
                 <AvatarFallback>WFE</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>

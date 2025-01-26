@@ -12,9 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-export default function LoginPage({ searchParams }: any) {
-  const callbackUrl = searchParams.callbackUrl || "/";
-
+export default function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
       <Dialog defaultOpen={true}>
@@ -33,7 +31,7 @@ export default function LoginPage({ searchParams }: any) {
               </div>
             </div>
           </DialogHeader>
-          <Button onClick={() => signIn("google", { callbackUrl })}>
+          <Button onClick={() => signIn("google", { callbackUrl: "/" })}>
             <FaGoogle /> Login with google
           </Button>
         </DialogContent>
