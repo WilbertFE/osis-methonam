@@ -17,10 +17,13 @@ import { Textarea } from "@/components/ui/textarea";
 // import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function Info({ user }: { user: User }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data: session }: any = useSession();
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,7 +33,7 @@ export default function Info({ user }: { user: User }) {
     const bio = data.get("bio");
 
     try {
-      const newData = await fetch("/api/users", {
+      const res = await fetch("/api/users", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -39,9 +42,13 @@ export default function Info({ user }: { user: User }) {
           fullname,
           username,
           bio,
+          oldUsername: session.user.username,
         }),
-      });
-      console.log("newData: ", newData);
+      }).then((res) => res.json());
+      if (res.statusCode === 200) {
+        router.refresh();
+        toast(res.message);
+      }
     } catch (error) {
       console.log(error);
     }

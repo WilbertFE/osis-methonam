@@ -43,10 +43,7 @@ export async function loginWithGoogle(data: any, callback: any) {
 }
 
 // user
-export async function getUserByUsername(
-  username: string,
-  callback: (result: { status: boolean; user: User | null }) => User | null
-) {
+export async function getUserByUsername(username: string) {
   const q = query(collection(db, "users"), where("username", "==", username));
   const snapshot = await getDocs(q);
 
@@ -56,10 +53,42 @@ export async function getUserByUsername(
   })) as User[] | [];
 
   if (user.length === 0) {
-    return callback({ status: false, user: null });
+    return null;
   }
 
   if (user.length > 0) {
-    return callback({ status: true, user: user[0] });
+    return user[0];
   }
+}
+
+export async function updateUser(
+  data: {
+    fullname: string;
+    username: string;
+    bio: string;
+  },
+  oldUsername: string
+) {
+  const q = query(
+    collection(db, "users"),
+    where("username", "==", oldUsername)
+  );
+  const snapshot = await getDocs(q);
+
+  const user = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as User[] | [];
+
+  if (user.length === 0) return { status: 404, message: "User not found" };
+
+  const ref = doc(collection(db, "users"), user[0].id);
+
+  return await updateDoc(ref, data)
+    .then(() => ({
+      status: 200,
+      message: "User data updated sucessfully",
+      newUsername: data.username,
+    }))
+    .catch(() => ({ status: 500, message: "Server error" }));
 }

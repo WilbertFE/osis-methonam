@@ -1,7 +1,38 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { updateUser } from "@/lib/firebase/service";
 
-export function PUT(request: NextRequest) {
-  const res = NextResponse;
-  console.log("req: ", request);
-  return res;
+export async function PUT(req: Request) {
+  try {
+    // Parse JSON body from the request
+    const body = await req.json();
+    const { fullname, username, bio, oldUsername } = body;
+
+    // Validasi input
+    if (!fullname || !username || !bio) {
+      return NextResponse.json(
+        { message: "All fields are required.", statusCode: 400 },
+        { status: 400 }
+      );
+    }
+
+    // Contoh: Simulasi menyimpan data ke database
+    const newUser = {
+      fullname,
+      username,
+      bio,
+    };
+
+    // Logika database dapat ditambahkan di sini
+    const { status, message } = await updateUser(newUser, oldUsername);
+    return NextResponse.json({ message, statusCode: status }, { status });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return NextResponse.json(
+      {
+        message: "An error occurred while updating the user.",
+        statusCode: 500,
+      },
+      { status: 500 }
+    );
+  }
 }
