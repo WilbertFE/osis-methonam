@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -24,10 +24,23 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getUserByEmail } from "@/lib/firebase/service";
+import { User } from "@/types/User";
 
 export default function MainNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { status, data: session }: any = useSession();
+  const [myData, setMyData] = useState<User | null>(null);
+
+  useEffect(() => {
+    if (status === "authenticated" && session.user) {
+      const getUserAsync = async () => {
+        const user = await getUserByEmail(session.user.email);
+        setMyData(user);
+      };
+      getUserAsync();
+    }
+  }, [session, status]);
 
   console.log("sesssion: ", session);
 
@@ -82,8 +95,8 @@ export default function MainNavbar() {
             <DropdownMenuTrigger>
               <Avatar>
                 <AvatarImage
-                  src={session?.user?.image || "https://github.com/shadcn.png"}
-                  alt="@WFE"
+                  src={myData?.image || "https://github.com/shadcn.png"}
+                  alt={myData?.fullname}
                 />
                 <AvatarFallback>WFE</AvatarFallback>
               </Avatar>
@@ -95,7 +108,7 @@ export default function MainNavbar() {
                 <>
                   <DropdownMenuItem>
                     <Link
-                      href={`/${session.user?.username}`}
+                      href={`/${myData?.username || ""}`}
                       className="w-full h-full cursor-pointer"
                     >
                       Profile

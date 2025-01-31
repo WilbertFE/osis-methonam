@@ -1,6 +1,6 @@
 "use client";
 import { User } from "@/types/User";
-import { MoveRight, SquareUserRound } from "lucide-react";
+import { Loader2, MoveRight, SquareUserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -16,17 +16,32 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 // import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { FormEvent } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { getUserByEmail } from "@/lib/firebase/service";
 
 export default function Info({ user }: { user: User }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data: session }: any = useSession();
+  const { data: session, status }: any = useSession();
   const router = useRouter();
+  const [myData, setMyData] = useState<User | null>(null);
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  useEffect(() => {
+    if (status === "authenticated" && session.user) {
+      const getUserAsync = async () => {
+        const user = await getUserByEmail(session.user.email);
+        setMyData(user);
+      };
+      getUserAsync();
+    }
+  }, [session, status]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsDisabled(true);
+
     const data = new FormData(e.currentTarget);
     const username = data.get("username");
     const fullname = data.get("fullname");
@@ -42,13 +57,20 @@ export default function Info({ user }: { user: User }) {
           fullname,
           username,
           bio,
-          oldUsername: session.user.username,
+          oldUsername: myData?.username,
         }),
       }).then((res) => res.json());
+
       if (res.statusCode === 200) {
-        router.refresh();
-        toast(res.message);
+        if (res.newUsername !== myData?.username) {
+          router.push(`${res.newUsername}`);
+        } else {
+          router.refresh();
+        }
       }
+
+      setIsDisabled(false);
+      toast(res.message);
     } catch (error) {
       console.log(error);
     }
@@ -56,7 +78,7 @@ export default function Info({ user }: { user: User }) {
 
   return (
     <>
-      {session?.user.username === user?.username && (
+      {user.username === myData?.username && (
         <div className="w-full flex flex-col px-4 gap-y-2">
           <span>Profile</span>
           <div className="flex flex-col border p-3 rounded-lg">
@@ -113,18 +135,20 @@ export default function Info({ user }: { user: User }) {
                     </div>
                   </div>
                   <DialogFooter>
-                    <Button type="submit">Save changes</Button>
+                    <Button type="submit" disabled={isDisabled}>
+                      {isDisabled ? (
+                        <>
+                          <Loader2 className="animate-spin" />
+                          Please wait
+                        </>
+                      ) : (
+                        "Save changes"
+                      )}
+                    </Button>
                   </DialogFooter>
                 </form>
               </DialogContent>
             </Dialog>
-
-            {/* <Separator className="my-2" /> */}
-            {/* <div className="flex gap-x-2 cursor-pointer">
-              <StickyNote />
-              <span className="flex-1 line-clamp-1">Posts</span>
-              <MoveRight />
-            </div> */}
           </div>
         </div>
       )}

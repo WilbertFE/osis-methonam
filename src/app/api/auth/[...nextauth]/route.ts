@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { loginWithGoogle } from "@/lib/firebase/service";
+import { getUserByEmail, loginWithGoogle } from "@/lib/firebase/service";
 import NextAuth, { AuthOptions } from "next-auth";
 import { v4 as uuidv4 } from "uuid";
 import GoogleProvider from "next-auth/providers/google";
+import { User } from "@/types/User";
 
 const authOptions: AuthOptions = {
   session: {
@@ -19,27 +20,42 @@ const authOptions: AuthOptions = {
   callbacks: {
     async jwt({ token, account, profile, user }: any) {
       if (account?.provider === "google") {
-        const data = {
-          fullname: user.name,
-          email: user.email,
-          username: `user-${uuidv4()}`,
-          image: user.image,
-          type: "google",
-          bio: "",
-        };
-        await loginWithGoogle(
-          data,
-          (result: { status: boolean; data: any }) => {
-            if (result.status) {
-              token.email = result.data.email;
-              token.fullname = result.data.fullname || "";
-              token.role = result.data.role;
-              token.username = result.data.username;
-              token.image = result.data.image;
-              token.bio = result.data.bio;
+        const userData = await getUserByEmail(user.email);
+        // if register
+        if (!userData) {
+          const data = {
+            email: user.email,
+            fullname: user.name,
+            type: "google",
+            username: uuidv4(),
+            bio: "Describe yourself.",
+            image: user.image,
+            role: "member",
+          };
+          await loginWithGoogle(
+            data,
+            (result: { status: boolean; data: any }) => {
+              if (result.status) {
+                token.email = result.data.email;
+                token.role = result.data.role;
+                token.type = result.data.type;
+              }
             }
-          }
-        );
+          );
+        }
+        // if login
+        if (userData) {
+          await loginWithGoogle(
+            userData,
+            (result: { status: boolean; data: any }) => {
+              if (result.status) {
+                token.email = result.data.email;
+                token.role = result.data.role;
+                token.type = result.data.type;
+              }
+            }
+          );
+        }
       }
 
       return token;
@@ -49,20 +65,13 @@ const authOptions: AuthOptions = {
         if ("email" in token) {
           session.user.email = token.email;
         }
-        if ("fullname" in token) {
-          session.user.fullname = token.fullname;
-        }
+
         if ("role" in token) {
           session.user.role = token.role;
         }
-        if ("username" in token) {
-          session.user.username = token.username;
-        }
-        if ("image" in token) {
-          session.user.image = token.image;
-        }
-        if ("bio" in token) {
-          session.user.bio = token.bio;
+
+        if ("type" in token) {
+          session.user.type = token.type;
         }
       }
 

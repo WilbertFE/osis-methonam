@@ -16,28 +16,30 @@ const db = getFirestore(app);
 
 // login
 export async function loginWithGoogle(data: any, callback: any) {
-  const q = query(collection(db, "users"), where("email", "==", data.email));
-  const snapshot = await getDocs(q);
+  const user = await getUserByEmail(data.email);
 
-  const user: any = snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
-
-  if (user.length > 0) {
-    data.role = user[0].role;
-    await updateDoc(doc(db, "users", user[0].id), data).then(() => {
+  // if login
+  if (user) {
+    await updateDoc(doc(db, "users", user.id), data).then(() => {
       callback({ status: true, data: data });
     });
-  } else {
-    data.role = "member";
+  }
+  // if resgister
+  else {
     const now = new Date().toISOString();
     await addDoc(collection(db, "users"), {
       ...data,
       created_at: now,
       updated_at: now,
     }).then(() => {
-      callback({ status: true, data: data });
+      callback({
+        status: true,
+        data: {
+          email: data.email,
+          role: data.role,
+          type: data.type,
+        },
+      });
     });
   }
 }
@@ -61,6 +63,24 @@ export async function getUserByUsername(username: string) {
   }
 }
 
+export async function getUserByEmail(email: string) {
+  const q = query(collection(db, "users"), where("email", "==", email));
+  const snapshot = await getDocs(q);
+
+  const user = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as User[] | [];
+
+  if (user.length === 0) return null;
+
+  const userData = user[0];
+
+  delete userData.role;
+
+  return userData;
+}
+
 export async function updateUser(
   data: {
     fullname: string;
@@ -80,15 +100,22 @@ export async function updateUser(
     ...doc.data(),
   })) as User[] | [];
 
-  if (user.length === 0) return { status: 404, message: "User not found" };
+  // if user not exists
+  if (user.length === 0)
+    return { statusCode: 404, message: "User not found", newUsername: null };
 
+  // if success
   const ref = doc(collection(db, "users"), user[0].id);
 
   return await updateDoc(ref, data)
     .then(() => ({
-      status: 200,
+      statusCode: 200,
       message: "User data updated sucessfully",
       newUsername: data.username,
     }))
-    .catch(() => ({ status: 500, message: "Server error" }));
+    .catch(() => ({
+      statusCode: 500,
+      message: "Server error",
+      newUsername: null,
+    }));
 }

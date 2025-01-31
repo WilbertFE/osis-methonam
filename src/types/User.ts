@@ -6,9 +6,9 @@ export type User = {
   type: string;
   fullname: string;
   username: string;
-  role: string;
+  role?: string;
   image: string;
-  created_at: Timestamp;
-  updated_at: Timestamp;
+  created_at?: Timestamp;
+  updated_at?: Timestamp;
   bio: string;
 };

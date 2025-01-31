@@ -14,33 +14,33 @@ import {
 } from "@/components/ui/dialog";
 import Link from "next/link";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
       <Dialog defaultOpen={true}>
         <Button asChild>
-          <DialogTrigger>Login</DialogTrigger>
+          <DialogTrigger>Register</DialogTrigger>
         </Button>
         <DialogContent className="max-w-[320px]">
           <DialogHeader>
             <div className="flex items-start">
               <div className="text-left flex-1">
-                <DialogTitle>Login</DialogTitle>
+                <DialogTitle>Register</DialogTitle>
                 <div className="my-1"></div>
                 <DialogDescription>
-                  Login ke aplikasi web OSIS METHONAM.
+                  Register ke aplikasi web OSIS METHONAM.
                 </DialogDescription>
               </div>
             </div>
           </DialogHeader>
           <Button onClick={() => signIn("google", { callbackUrl: "/" })}>
-            <FaGoogle /> Login with google
+            <FaGoogle /> Register with google
           </Button>
           <DialogFooter>
             <div className="text-center">
-              Belum punya akun?{" "}
-              <Link href="/register" className="text-blue-600 inline-block">
-                Register
+              Sudah punya akun?{" "}
+              <Link href="/Login" className="text-blue-600 inline-block">
+                Login
               </Link>
             </div>
           </DialogFooter>

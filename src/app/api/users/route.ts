@@ -8,9 +8,13 @@ export async function PUT(req: Request) {
     const { fullname, username, bio, oldUsername } = body;
 
     // Validasi input
-    if (!fullname || !username || !bio) {
+    if (!fullname || !username || !bio || !oldUsername) {
       return NextResponse.json(
-        { message: "All fields are required.", statusCode: 400 },
+        {
+          message: "All fields are required.",
+          statusCode: 400,
+          newUsername: null,
+        },
         { status: 400 }
       );
     }
@@ -23,14 +27,21 @@ export async function PUT(req: Request) {
     };
 
     // Logika database dapat ditambahkan di sini
-    const { status, message } = await updateUser(newUser, oldUsername);
-    return NextResponse.json({ message, statusCode: status }, { status });
+    const { statusCode, message, newUsername } = await updateUser(
+      newUser,
+      oldUsername
+    );
+    return NextResponse.json(
+      { message, statusCode, newUsername },
+      { status: statusCode }
+    );
   } catch (error) {
     console.error("Error updating user:", error);
     return NextResponse.json(
       {
         message: "An error occurred while updating the user.",
         statusCode: 500,
+        newUsername: null,
       },
       { status: 500 }
     );
